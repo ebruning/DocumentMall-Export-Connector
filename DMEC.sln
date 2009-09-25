@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentMallExportConnector", "DocumentMallExportConnector\DocumentMallExportConnector.csproj", "{16CA9055-8715-4662-B890-1B559A1CAF73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16CA9055-8715-4662-B890-1B559A1CAF73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16CA9055-8715-4662-B890-1B559A1CAF73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16CA9055-8715-4662-B890-1B559A1CAF73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16CA9055-8715-4662-B890-1B559A1CAF73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal
