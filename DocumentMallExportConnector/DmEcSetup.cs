@@ -1,42 +1,71 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using DocumentMallExportConnector.Properties;
 using Kofax.Eclipse.Base;
 
 namespace DocumentMallExportConnector
 {
     public partial class DmEcSetup : XtraForm
     {
-        readonly Settings _settings = new Settings();
+        readonly ReleaseSettings _settings = new ReleaseSettings();
 
-        public DmEcSetup(IEnumerable<IExporter> exporters)
+        public DmEcSetup(ref ReleaseSettings settings, IEnumerable<IExporter> exporters, IIndexField [] indexFields)
         {
             InitializeComponent();
-            
-            
+
+            _settings = settings;
+
+            LoadSettings();
+
+            indexUserControl.SetRepositoryHeader("DocumentMall Index");
+            indexUserControl.SetExpressIndexDropDown(indexFields);
+
+            documentUserControl.DisplayDocumentType(false);
         }
 
-        private void ConnectClicked()
+        private void LoadSettings()
         {
-            //Need to throw error if server name is blank
-            if (string.IsNullOrEmpty(serverLogonUserControl.Server))
-                return;
+            txtAccount.Text = _settings.Account;
+            txtUser.Text = _settings.User;
+            txtDestination.Text = _settings.Destination; 
 
-            _settings.Server = serverLogonUserControl.Server;
-            _settings.User = serverLogonUserControl.User;
-            _settings.Password = serverLogonUserControl.Password;
-            _settings.Destination = serverLogonUserControl.Destination;
+            if(_settings.IndexPairs.Count > 0)
+                indexUserControl.SetIndexGrid(_settings.IndexPairs);
+        }
 
-            
-            documentUserControl.Enabled = true;
-            indexUserControl.Enabled = true;
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            _settings.User = txtUser.Text;
+            _settings.Account = txtAccount.Text;
+            _settings.Destination = txtDestination.Text;
 
+            _settings.FileTypeId = documentUserControl.FileTypeId;
+            _settings.ReleaseMode = documentUserControl.GetSingleMiltiPage();
+
+            _settings.IndexPairs = indexUserControl.GetIndexPairsDictionary();
+
+            Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            _settings.ReloadSettings();
+            Close();
+        }
+
+        private void btnAddIndex_Click(object sender, EventArgs e)
+        {
+            indexUserControl.AddRepositoryIndex();
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.SelectedPath = txtDestination.Text;
+
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+                txtDestination.Text = dialog.SelectedPath;
         }
     }
 }

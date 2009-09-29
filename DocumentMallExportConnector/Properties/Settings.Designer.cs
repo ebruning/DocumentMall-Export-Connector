@@ -26,18 +26,6 @@ namespace DocumentMallExportConnector.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Server {
-            get {
-                return ((string)(this["Server"]));
-            }
-            set {
-                this["Server"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string User {
             get {
                 return ((string)(this["User"]));
@@ -50,12 +38,12 @@ namespace DocumentMallExportConnector.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Password {
+        public string Account {
             get {
-                return ((string)(this["Password"]));
+                return ((string)(this["Account"]));
             }
             set {
-                this["Password"] = value;
+                this["Account"] = value;
             }
         }
         
@@ -68,6 +56,53 @@ namespace DocumentMallExportConnector.Properties {
             }
             set {
                 this["Destination"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MultiPage")]
+        public global::Kofax.Eclipse.Base.ReleaseMode ReleaseMode {
+            get {
+                return ((global::Kofax.Eclipse.Base.ReleaseMode)(this["ReleaseMode"]));
+            }
+            set {
+                this["ReleaseMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Guid FileTypeId {
+            get {
+                return ((global::System.Guid)(this["FileTypeId"]));
+            }
+            set {
+                this["FileTypeId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int SingleMultiPage {
+            get {
+                return ((int)(this["SingleMultiPage"]));
+            }
+            set {
+                this["SingleMultiPage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string IndexPairs {
+            get {
+                return ((string)(this["IndexPairs"]));
+            }
+            set {
+                this["IndexPairs"] = value;
             }
         }
     }

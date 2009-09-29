@@ -7,6 +7,7 @@ namespace DocumentMallExportConnector
     public class DmEc : IReleaseScript
     {
         private ReleaseMode _workingMode;
+        private ReleaseSettings _releaseSettings = new ReleaseSettings();
 
         #region Export Connector definitions
         public string Description
@@ -43,12 +44,13 @@ namespace DocumentMallExportConnector
 
         public void SerializeSettings(System.IO.Stream output)
         {
+            _releaseSettings.SaveSettings();
 
         }
 
         public void Setup(IList<IExporter> exporters, IIndexField[] indexFields, IDictionary<string, string> releaseData)
         {
-            DmEcSetup setup = new DmEcSetup(exporters);
+            DmEcSetup setup = new DmEcSetup( ref _releaseSettings, exporters, indexFields);
             setup.ShowDialog();
 
         } 
