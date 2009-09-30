@@ -29,29 +29,30 @@ namespace DocumentMallExportConnector
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DmEcSetup));
             this.gcIndex = new DevExpress.XtraEditors.GroupControl();
+            this.btnAddIndex = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnOk = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.txtAccount = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.txtUser = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.txtDestination = new DevExpress.XtraEditors.TextEdit();
             this.btnBrowse = new DevExpress.XtraEditors.SimpleButton();
+            this.txtDestination = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.txtUser = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.txtAccount = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
-            this.btnAddIndex = new DevExpress.XtraEditors.SimpleButton();
-            this.indexUserControl = new KXP.Export.Controls.IndexUserControl();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.indexUserControl = new KXP.Export.Controls.IndexUserControl();
             this.documentUserControl = new KXP.Export.Controls.DocumentUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.gcIndex)).BeginInit();
             this.gcIndex.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAccount.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDestination.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAccount.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +67,16 @@ namespace DocumentMallExportConnector
             this.gcIndex.Size = new System.Drawing.Size(483, 224);
             this.gcIndex.TabIndex = 2;
             this.gcIndex.Text = "Index";
+            // 
+            // btnAddIndex
+            // 
+            this.btnAddIndex.Image = ((System.Drawing.Image)(resources.GetObject("btnAddIndex.Image")));
+            this.btnAddIndex.Location = new System.Drawing.Point(439, 0);
+            this.btnAddIndex.Name = "btnAddIndex";
+            this.btnAddIndex.Size = new System.Drawing.Size(32, 23);
+            this.btnAddIndex.TabIndex = 1;
+            this.btnAddIndex.ToolTipTitle = "Add index fields";
+            this.btnAddIndex.Click += new System.EventHandler(this.btnAddIndex_Click);
             // 
             // btnCancel
             // 
@@ -103,51 +114,6 @@ namespace DocumentMallExportConnector
             this.groupControl1.TabIndex = 5;
             this.groupControl1.Text = "DocumentMall";
             // 
-            // labelControl1
-            // 
-            this.labelControl1.Location = new System.Drawing.Point(12, 25);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(39, 13);
-            this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "Account";
-            // 
-            // txtAccount
-            // 
-            this.txtAccount.Location = new System.Drawing.Point(12, 44);
-            this.txtAccount.Name = "txtAccount";
-            this.txtAccount.Size = new System.Drawing.Size(236, 20);
-            this.txtAccount.TabIndex = 1;
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(12, 71);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(22, 13);
-            this.labelControl2.TabIndex = 2;
-            this.labelControl2.Text = "User";
-            // 
-            // txtUser
-            // 
-            this.txtUser.Location = new System.Drawing.Point(12, 91);
-            this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(236, 20);
-            this.txtUser.TabIndex = 3;
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Location = new System.Drawing.Point(12, 118);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(54, 13);
-            this.labelControl3.TabIndex = 4;
-            this.labelControl3.Text = "Destination";
-            // 
-            // txtDestination
-            // 
-            this.txtDestination.Location = new System.Drawing.Point(12, 137);
-            this.txtDestination.Name = "txtDestination";
-            this.txtDestination.Size = new System.Drawing.Size(378, 20);
-            this.txtDestination.TabIndex = 5;
-            // 
             // btnBrowse
             // 
             this.btnBrowse.Location = new System.Drawing.Point(396, 134);
@@ -157,26 +123,54 @@ namespace DocumentMallExportConnector
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
+            // txtDestination
+            // 
+            this.txtDestination.Location = new System.Drawing.Point(12, 137);
+            this.txtDestination.Name = "txtDestination";
+            this.txtDestination.Size = new System.Drawing.Size(378, 20);
+            this.txtDestination.TabIndex = 5;
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(12, 118);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(54, 13);
+            this.labelControl3.TabIndex = 4;
+            this.labelControl3.Text = "Destination";
+            // 
+            // txtUser
+            // 
+            this.txtUser.Location = new System.Drawing.Point(12, 91);
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Size = new System.Drawing.Size(236, 20);
+            this.txtUser.TabIndex = 3;
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(12, 71);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(22, 13);
+            this.labelControl2.TabIndex = 2;
+            this.labelControl2.Text = "User";
+            // 
+            // txtAccount
+            // 
+            this.txtAccount.Location = new System.Drawing.Point(12, 44);
+            this.txtAccount.Name = "txtAccount";
+            this.txtAccount.Size = new System.Drawing.Size(236, 20);
+            this.txtAccount.TabIndex = 1;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(12, 25);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(39, 13);
+            this.labelControl1.TabIndex = 0;
+            this.labelControl1.Text = "Account";
+            // 
             // defaultLookAndFeel1
             // 
             this.defaultLookAndFeel1.LookAndFeel.SkinName = "Money Twins";
-            // 
-            // btnAddIndex
-            // 
-            this.btnAddIndex.Location = new System.Drawing.Point(396, 0);
-            this.btnAddIndex.Name = "btnAddIndex";
-            this.btnAddIndex.Size = new System.Drawing.Size(75, 23);
-            this.btnAddIndex.TabIndex = 1;
-            this.btnAddIndex.Text = "Add Index";
-            this.btnAddIndex.Click += new System.EventHandler(this.btnAddIndex_Click);
-            // 
-            // indexUserControl
-            // 
-            this.indexUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.indexUserControl.Location = new System.Drawing.Point(2, 22);
-            this.indexUserControl.Name = "indexUserControl";
-            this.indexUserControl.Size = new System.Drawing.Size(479, 200);
-            this.indexUserControl.TabIndex = 0;
             // 
             // groupControl2
             // 
@@ -187,6 +181,14 @@ namespace DocumentMallExportConnector
             this.groupControl2.Size = new System.Drawing.Size(483, 106);
             this.groupControl2.TabIndex = 6;
             this.groupControl2.Text = "File Type";
+            // 
+            // indexUserControl
+            // 
+            this.indexUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.indexUserControl.Location = new System.Drawing.Point(2, 22);
+            this.indexUserControl.Name = "indexUserControl";
+            this.indexUserControl.Size = new System.Drawing.Size(479, 200);
+            this.indexUserControl.TabIndex = 0;
             // 
             // documentUserControl
             // 
@@ -213,9 +215,9 @@ namespace DocumentMallExportConnector
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAccount.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDestination.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAccount.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             this.ResumeLayout(false);

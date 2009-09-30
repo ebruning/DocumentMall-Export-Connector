@@ -16,6 +16,8 @@ namespace DocumentMallExportConnector
 
             _settings = settings;
 
+            documentUserControl.InitializeControl(exporters, _settings.ReleaseMode, _settings.FileTypeId);
+
             LoadSettings();
 
             indexUserControl.SetRepositoryHeader("DocumentMall Index");
@@ -67,5 +69,7 @@ namespace DocumentMallExportConnector
             if (dialog.ShowDialog(this) == DialogResult.OK)
                 txtDestination.Text = dialog.SelectedPath;
         }
+
+
     }
 }
