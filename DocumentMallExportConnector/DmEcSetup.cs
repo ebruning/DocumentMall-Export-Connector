@@ -27,7 +27,7 @@ namespace DocumentMallExportConnector
         }
 
         private void LoadSettings()
-        {
+        { 
             txtAccount.Text = _settings.Account;
             txtUser.Text = _settings.User;
             txtDestination.Text = _settings.Destination; 
@@ -69,7 +69,6 @@ namespace DocumentMallExportConnector
             if (dialog.ShowDialog(this) == DialogResult.OK)
                 txtDestination.Text = dialog.SelectedPath;
         }
-
 
     }
 }

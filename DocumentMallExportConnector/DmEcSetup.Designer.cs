@@ -44,8 +44,8 @@ namespace DocumentMallExportConnector
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.indexUserControl = new KXP.Export.Controls.IndexUserControl();
             this.documentUserControl = new KXP.Export.Controls.DocumentUserControl();
+            this.indexUserControl = new KXP.Export.Controls.IndexUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.gcIndex)).BeginInit();
             this.gcIndex.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -59,8 +59,8 @@ namespace DocumentMallExportConnector
             // 
             // gcIndex
             // 
-            this.gcIndex.Controls.Add(this.btnAddIndex);
             this.gcIndex.Controls.Add(this.indexUserControl);
+            this.gcIndex.Controls.Add(this.btnAddIndex);
             this.gcIndex.Dock = System.Windows.Forms.DockStyle.Top;
             this.gcIndex.Location = new System.Drawing.Point(0, 277);
             this.gcIndex.Name = "gcIndex";
@@ -182,14 +182,6 @@ namespace DocumentMallExportConnector
             this.groupControl2.TabIndex = 6;
             this.groupControl2.Text = "File Type";
             // 
-            // indexUserControl
-            // 
-            this.indexUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.indexUserControl.Location = new System.Drawing.Point(2, 22);
-            this.indexUserControl.Name = "indexUserControl";
-            this.indexUserControl.Size = new System.Drawing.Size(479, 200);
-            this.indexUserControl.TabIndex = 0;
-            // 
             // documentUserControl
             // 
             this.documentUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -197,6 +189,14 @@ namespace DocumentMallExportConnector
             this.documentUserControl.Name = "documentUserControl";
             this.documentUserControl.Size = new System.Drawing.Size(479, 82);
             this.documentUserControl.TabIndex = 0;
+            // 
+            // indexUserControl
+            // 
+            this.indexUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.indexUserControl.Location = new System.Drawing.Point(2, 22);
+            this.indexUserControl.Name = "indexUserControl";
+            this.indexUserControl.Size = new System.Drawing.Size(479, 200);
+            this.indexUserControl.TabIndex = 2;
             // 
             // DmEcSetup
             // 
@@ -208,7 +208,9 @@ namespace DocumentMallExportConnector
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "DmEcSetup";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "DocumentMall Export Setup";
             ((System.ComponentModel.ISupportInitialize)(this.gcIndex)).EndInit();
             this.gcIndex.ResumeLayout(false);
@@ -227,7 +229,6 @@ namespace DocumentMallExportConnector
         #endregion
 
         private DevExpress.XtraEditors.GroupControl gcIndex;
-        private KXP.Export.Controls.IndexUserControl indexUserControl;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnOk;
         private DevExpress.XtraEditors.GroupControl groupControl1;
@@ -242,6 +243,7 @@ namespace DocumentMallExportConnector
         private DevExpress.XtraEditors.SimpleButton btnAddIndex;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private KXP.Export.Controls.DocumentUserControl documentUserControl;
+        private KXP.Export.Controls.IndexUserControl indexUserControl;
 
 
 
