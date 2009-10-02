@@ -17,7 +17,7 @@ namespace DocumentMallExportConnector
         public XmlWriter(string destination, string batchId)
         {
             _batchName = batchId;
-            _stream = new FileStream(Path.Combine(destination, batchId + ".xml"), FileMode.Append, FileAccess.Write, FileShare.None);
+            _stream = new FileStream(Path.Combine(destination, "batch.xml"), FileMode.Append, FileAccess.Write, FileShare.None);
             _writer = new StreamWriter(_stream, Encoding.ASCII);
         }
 
@@ -60,15 +60,16 @@ namespace DocumentMallExportConnector
 
         public void WriteDocumentFileData(string fileName)
         {
-            _writer.Write("		<content>" + Environment.NewLine);
-            _writer.Write("		  <file>" + Environment.NewLine);
-            _writer.Write(string.Format("		    <fname>{0}</fname>", fileName) + Environment.NewLine);
-            _writer.Write(string.Format("		    <format>{0}</format>", Path.GetExtension(fileName).TrimStart('.')) + Environment.NewLine);
-            _writer.Write("		  </file>" + Environment.NewLine);
+            _writer.Write("		  <content>" + Environment.NewLine);
+            _writer.Write("		    <file>" + Environment.NewLine);
+            _writer.Write(string.Format("	  	      <fname>{0}</fname>", fileName) + Environment.NewLine);
+            _writer.Write(string.Format("	  	      <format>{0}</format>", Path.GetExtension(fileName).TrimStart('.')) + Environment.NewLine);
+            _writer.Write("		    </file>" + Environment.NewLine);
         }
 
         public void WriteFooter()
         {
+            _writer.Write("      </content>" + Environment.NewLine);
             _writer.Write("    </document>" + Environment.NewLine);
             _writer.Write("  </body>" + Environment.NewLine);
             _writer.Write("</batch>" + Environment.NewLine);

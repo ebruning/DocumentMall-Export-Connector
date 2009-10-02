@@ -45,12 +45,12 @@ namespace DocumentMallExportConnector
         #endregion
         
         #region Settings
-        public void DeserializeSettings(System.IO.Stream input)
+        public void DeserializeSettings(Stream input)
         {
 
         }
 
-        public void SerializeSettings(System.IO.Stream output)
+        public void SerializeSettings(Stream output)
         {
             _releaseSettings.SaveSettings();
 
@@ -91,14 +91,14 @@ namespace DocumentMallExportConnector
         
         public object StartBatch(IBatch batch)
         {
-            _batchFolder = Path.Combine(_releaseSettings.Destination, batch.Name);
-            _xmlData = new XmlWriter(_releaseSettings.Destination, batch.Name );
+            //Set the batch folder using the destination, Account and batch name
+            _batchFolder = Path.Combine(_releaseSettings.Destination, Path.Combine(_releaseSettings.Account, batch.Name));
 
             if (Directory.Exists(_batchFolder))
                 throw new Exception("Batch folder already exists");
 
             Directory.CreateDirectory(_batchFolder);
-
+            _xmlData = new XmlWriter(_batchFolder, batch.Name);
             _xmlData.WriteBatchHeader(DateTime.Now.ToShortDateString(), _releaseSettings.Account);
 
             return null;
