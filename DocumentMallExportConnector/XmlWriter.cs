@@ -3,82 +3,113 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Xml;
 using Kofax.Eclipse.Base;
 
 namespace DocumentMallExportConnector
 {
     public class XmlWriter
     {
-        private string _batchName;
+        private readonly string _batchName;
+        private string _xmlFileName = "";
 
-        private FileStream _stream;
-        private StreamWriter _writer;
-
+        private XmlTextWriter _xmlWriter;
+        private XmlDocument _xmldocument = new XmlDocument();
+        
         public XmlWriter(string destination, string batchId)
         {
             _batchName = batchId;
-            _stream = new FileStream(Path.Combine(destination, "batch.xml"), FileMode.Append, FileAccess.Write, FileShare.None);
-            _writer = new StreamWriter(_stream, Encoding.ASCII);
+            _xmlFileName = Path.Combine(destination, "batch.xml");
+
+            _xmlWriter = new XmlTextWriter(_xmlFileName, Encoding.UTF8);
+            _xmlWriter.Formatting = Formatting.Indented;
+            _xmlWriter.WriteStartElement("batch");
+            _xmlWriter.WriteEndElement();
+            _xmlWriter.Close();
+            _xmldocument.Load(_xmlFileName);
         }
 
         public void WriteBatchHeader(string releaseDateTime, string docbase)
         {
-            _writer.Write("<batch>" + Environment.NewLine);
-            _writer.Write("  <header>" + Environment.NewLine);
-            _writer.Write(string.Format("    <batchid>{0}</batchid>", _batchName) + Environment.NewLine);
-            _writer.Write( string.Format("    <date>{0}</date>", releaseDateTime) + Environment.NewLine);
-            _writer.Write(string.Format("  <docbase>{0}</docbase>", docbase) + Environment.NewLine);
-            _writer.Write(string.Format("  <source>{0}</source>", "Express") + Environment.NewLine);
-            _writer.Write("  </header>" + Environment.NewLine);
-            _writer.Write("  <body>" + Environment.NewLine);
+            XmlNode root = _xmldocument.DocumentElement;
+            XmlElement headerNode = _xmldocument.CreateElement("header");
+
+            root.AppendChild(headerNode);
+
+            WriteChildNode(headerNode, "batchid", _batchName);
+            WriteChildNode(headerNode, "date", releaseDateTime);
+            WriteChildNode(headerNode, "docbase", docbase);
+            WriteChildNode(headerNode, "source", "Express");
+
+            XmlElement bodyNode = _xmldocument.CreateElement("body");
+            root.AppendChild(bodyNode);
         }
 
         public void WriteDocumentData(string docName, string securityKey, string path, string docType)
         {
-            _writer.Write("    <document>" + Environment.NewLine);
-            _writer.Write(string.Format("      <name>{0}</name>", docName) + Environment.NewLine);
-            _writer.Write("      <title />" + Environment.NewLine);
-            _writer.Write("      <desc></desc>" + Environment.NewLine);
-            _writer.Write("      <keywords />" + Environment.NewLine);
-            _writer.Write("      <authors />" + Environment.NewLine);
-            _writer.Write(string.Format("      <securitykey>{0}</securitykey>", securityKey) + Environment.NewLine);
-            _writer.Write("      <folderlinks>" + Environment.NewLine);
-            _writer.Write(string.Format("        <path>{0}</path>", path) + Environment.NewLine);
-            _writer.Write("      </folderlinks>" + Environment.NewLine);
-            _writer.Write("      <doctype>" + Environment.NewLine);
-            _writer.Write(string.Format("        <tname>{0}</tname>", docType) + Environment.NewLine);
-            _writer.Write("      </doctype>" + Environment.NewLine);
+            XmlElement root = _xmldocument.DocumentElement;
+            XmlNode bodyNode = root.SelectSingleNode("//*/body");
+            XmlElement documentNode = _xmldocument.CreateElement("document");
+
+            bodyNode.AppendChild(documentNode);
+
+            WriteChildNode(documentNode, "name", docName);
+            WriteChildNode(documentNode, "title", string.Empty);
+            WriteChildNode(documentNode, "desc", string.Empty);
+            WriteChildNode(documentNode, "keywords", string.Empty);
+            WriteChildNode(documentNode, "authors", string.Empty);
+            WriteChildNode(documentNode, "securitykey", securityKey);
+
+            XmlElement folderLinksNode = _xmldocument.CreateElement("folderlinks");
+            
+            WriteChildNode(folderLinksNode, "path", path);
+            documentNode.AppendChild(folderLinksNode);
+
+            XmlElement docTypeNode = _xmldocument.CreateElement("doctype");
+
+            WriteChildNode(docTypeNode, "iname", docType);
+            documentNode.AppendChild(docTypeNode);
         }
 
-        public void WriteDocumentIndexData(string indexName, string indexValue)
+        public void WriteDocumentIndexData(string indexName, string indexValue, string documentName)
         {
-            _writer.Write("        <index>" + Environment.NewLine);
-            _writer.Write(string.Format("          <iname>{0}</iname>", indexName) + Environment.NewLine);
-            _writer.Write(string.Format("          <ivalue>{0}</ivalue>", indexValue) + Environment.NewLine);
-            _writer.Write("        </index>" + Environment.NewLine);
+            XmlElement root = _xmldocument.DocumentElement;
+            XmlNode indexNode = root.SelectSingleNode("//*/document[name='" + Path.GetFileName(documentName) + "']/doctype");
+            XmlElement indexElement = _xmldocument.CreateElement("index");
+
+            WriteChildNode(indexElement, "iname", indexName);
+            WriteChildNode(indexElement, "ivalue", indexValue);
+            indexNode.AppendChild(indexElement);
         }
 
         public void WriteDocumentFileData(string fileName)
         {
-            _writer.Write("		  <content>" + Environment.NewLine);
-            _writer.Write("		    <file>" + Environment.NewLine);
-            _writer.Write(string.Format("	  	      <fname>{0}</fname>", fileName) + Environment.NewLine);
-            _writer.Write(string.Format("	  	      <format>{0}</format>", Path.GetExtension(fileName).TrimStart('.')) + Environment.NewLine);
-            _writer.Write("		    </file>" + Environment.NewLine);
-        }
+            XmlElement root = _xmldocument.DocumentElement;
+            XmlNode documentNode = root.SelectSingleNode("//*/document[name='" + Path.GetFileName(fileName) + "']");
+            XmlElement contentNode = _xmldocument.CreateElement("content");
 
-        public void WriteFooter()
-        {
-            _writer.Write("      </content>" + Environment.NewLine);
-            _writer.Write("    </document>" + Environment.NewLine);
-            _writer.Write("  </body>" + Environment.NewLine);
-            _writer.Write("</batch>" + Environment.NewLine);
+            documentNode.AppendChild(contentNode);
+
+            XmlElement fileNode = _xmldocument.CreateElement("file");
+            
+            WriteChildNode(fileNode, "fname", Path.GetFileName(fileName));
+            WriteChildNode(fileNode, "format", Path.GetExtension(fileName).TrimStart('.'));
+            contentNode.AppendChild(fileNode);
         }
 
         public void CloseXml()
         {
-            _writer.Flush();
-            _writer.Close();
+            _xmldocument.Save(_xmlFileName);
+            _xmlWriter.Close();
+        }
+
+        private void WriteChildNode(XmlElement root, string element, string value)
+        {
+            XmlElement childNode = _xmldocument.CreateElement(element);
+
+            childNode.InnerText = value;
+
+            root.AppendChild(childNode);
         }
     }
  }

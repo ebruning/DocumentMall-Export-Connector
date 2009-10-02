@@ -95,7 +95,9 @@ namespace DocumentMallExportConnector
             _batchFolder = Path.Combine(_releaseSettings.Destination, Path.Combine(_releaseSettings.Account, batch.Name));
 
             if (Directory.Exists(_batchFolder))
-                throw new Exception("Batch folder already exists");
+                //comment out for release
+                Directory.Delete(_batchFolder, true);
+            //    throw new Exception("Batch folder already exists");
 
             Directory.CreateDirectory(_batchFolder);
             _xmlData = new XmlWriter(_batchFolder, batch.Name);
@@ -145,7 +147,6 @@ namespace DocumentMallExportConnector
 
         public void EndBatch(IBatch batch, object handle, ReleaseResult result)
         {
-            _xmlData.WriteFooter();
             _xmlData.CloseXml();
         }
 
@@ -162,7 +163,7 @@ namespace DocumentMallExportConnector
 
             foreach (KeyValuePair<string, string> index in _releaseSettings.IndexPairs)
             {
-                _xmlData.WriteDocumentIndexData(index.Key, index.Value);
+                _xmlData.WriteDocumentIndexData(index.Key, index.Value, fullyQulifiedFileName);
             }
         }
 
