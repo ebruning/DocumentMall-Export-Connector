@@ -31,6 +31,7 @@ namespace DocumentMallExportConnector
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DmEcSetup));
             this.gcIndex = new DevExpress.XtraEditors.GroupControl();
+            this.indexUserControl = new KXP.Export.Controls.IndexUserControl();
             this.btnAddIndex = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnOk = new DevExpress.XtraEditors.SimpleButton();
@@ -45,7 +46,6 @@ namespace DocumentMallExportConnector
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.documentUserControl = new KXP.Export.Controls.DocumentUserControl();
-            this.indexUserControl = new KXP.Export.Controls.IndexUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.gcIndex)).BeginInit();
             this.gcIndex.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -67,6 +67,14 @@ namespace DocumentMallExportConnector
             this.gcIndex.Size = new System.Drawing.Size(483, 224);
             this.gcIndex.TabIndex = 2;
             this.gcIndex.Text = "Index";
+            // 
+            // indexUserControl
+            // 
+            this.indexUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.indexUserControl.Location = new System.Drawing.Point(2, 22);
+            this.indexUserControl.Name = "indexUserControl";
+            this.indexUserControl.Size = new System.Drawing.Size(479, 200);
+            this.indexUserControl.TabIndex = 2;
             // 
             // btnAddIndex
             // 
@@ -189,14 +197,6 @@ namespace DocumentMallExportConnector
             this.documentUserControl.Name = "documentUserControl";
             this.documentUserControl.Size = new System.Drawing.Size(479, 82);
             this.documentUserControl.TabIndex = 0;
-            // 
-            // indexUserControl
-            // 
-            this.indexUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.indexUserControl.Location = new System.Drawing.Point(2, 22);
-            this.indexUserControl.Name = "indexUserControl";
-            this.indexUserControl.Size = new System.Drawing.Size(479, 200);
-            this.indexUserControl.TabIndex = 2;
             // 
             // DmEcSetup
             // 

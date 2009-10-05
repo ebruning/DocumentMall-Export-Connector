@@ -29,7 +29,7 @@ namespace DocumentMallExportConnector
             _xmldocument.Load(_xmlFileName);
         }
 
-        public void WriteBatchHeader(string releaseDateTime, string docbase)
+        public void WriteBatchHeader(string releaseDateTime, string docbase, string user)
         {
             XmlNode root = _xmldocument.DocumentElement;
             XmlElement headerNode = _xmldocument.CreateElement("header");
@@ -38,6 +38,7 @@ namespace DocumentMallExportConnector
 
             WriteChildNode(headerNode, "batchid", _batchName);
             WriteChildNode(headerNode, "date", releaseDateTime);
+            WriteChildNode(headerNode, "user", user);
             WriteChildNode(headerNode, "docbase", docbase);
             WriteChildNode(headerNode, "source", "Express");
 
@@ -67,7 +68,7 @@ namespace DocumentMallExportConnector
 
             XmlElement docTypeNode = _xmldocument.CreateElement("doctype");
 
-            WriteChildNode(docTypeNode, "iname", docType);
+            WriteChildNode(docTypeNode, "tname", docType);
             documentNode.AppendChild(docTypeNode);
         }
 

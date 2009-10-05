@@ -56,7 +56,8 @@ namespace DocumentMallExportConnector
 
         }
 
-        public void Setup(IList<IExporter> exporters, IIndexField[] indexFields, IDictionary<string, string> releaseData)
+        public void Setup(IList<IExporter> exporters, IIndexField[] indexFields, 
+                          IDictionary<string, string> releaseData)
         {
             DmEcSetup setup = new DmEcSetup( ref _releaseSettings, exporters, indexFields);
             setup.ShowDialog();
@@ -64,7 +65,9 @@ namespace DocumentMallExportConnector
         } 
         #endregion
 
-        public object StartRelease(IList<IExporter> exporters, IIndexField[] indexFields, IDictionary<string, string> releaseData)
+        public object StartRelease(IList<IExporter> exporters, 
+                                   IIndexField[] indexFields, 
+                                   IDictionary<string, string> releaseData)
         {
             if(string.IsNullOrEmpty(_releaseSettings.Destination))
                 throw new Exception("Please specify a release destination");
@@ -101,7 +104,7 @@ namespace DocumentMallExportConnector
 
             Directory.CreateDirectory(_batchFolder);
             _xmlData = new XmlWriter(_batchFolder, batch.Name);
-            _xmlData.WriteBatchHeader(DateTime.Now.ToShortDateString(), _releaseSettings.Account);
+            _xmlData.WriteBatchHeader(DateTime.Now.ToShortDateString(), _releaseSettings.Account, _releaseSettings.User);
 
             return null;
         }
@@ -157,7 +160,7 @@ namespace DocumentMallExportConnector
         public void SetDocumentData(IDocument doc, string fullyQulifiedFileName)
         {
             if (_releaseSettings.ReleaseMode == ReleaseMode.MultiPage)
-                _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), "seckey", _batchFolder, "doctype");
+                _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), "Finance", "/Invoices/Kofax", "invoices");
             else
                 _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), "seckey", _documentFolder, "doctype");
 
