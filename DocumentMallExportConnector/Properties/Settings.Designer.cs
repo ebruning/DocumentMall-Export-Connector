@@ -105,5 +105,41 @@ namespace DocumentMallExportConnector.Properties {
                 this["IndexPairs"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DocType {
+            get {
+                return ((string)(this["DocType"]));
+            }
+            set {
+                this["DocType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SecurityKey {
+            get {
+                return ((string)(this["SecurityKey"]));
+            }
+            set {
+                this["SecurityKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RepositoryPath {
+            get {
+                return ((string)(this["RepositoryPath"]));
+            }
+            set {
+                this["RepositoryPath"] = value;
+            }
+        }
     }
 }

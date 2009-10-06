@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 using Kofax.Eclipse.Base;
 
 namespace DocumentMallExportConnector
@@ -160,13 +161,14 @@ namespace DocumentMallExportConnector
         public void SetDocumentData(IDocument doc, string fullyQulifiedFileName)
         {
             if (_releaseSettings.ReleaseMode == ReleaseMode.MultiPage)
-                _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), "Finance", "/Invoices/Kofax", "invoices");
+                _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), _releaseSettings.SecurityKey, _releaseSettings.RepositoryPath, GetDocumentType(doc));
             else
                 _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), "seckey", _documentFolder, "doctype");
 
-            foreach (KeyValuePair<string, string> index in _releaseSettings.IndexPairs)
+            for (int indexCount = 0; indexCount < doc.IndexDataCount; indexCount++ )
             {
-                _xmlData.WriteDocumentIndexData(index.Key, index.Value, fullyQulifiedFileName);
+                if (doc.GetIndexDataValue(indexCount) != GetDocumentType(doc))
+                    _xmlData.WriteDocumentIndexData(doc.GetIndexDataLabel(indexCount), doc.GetIndexDataValue(indexCount), fullyQulifiedFileName);
             }
         }
 
@@ -194,6 +196,11 @@ namespace DocumentMallExportConnector
                 }
             }
             return output;
+        }
+
+        private string GetDocumentType(IDocument doc)
+        {
+            return doc.GetIndexDataValue(_releaseSettings.DocumentType) ?? _releaseSettings.DocumentType;
         }
     }
 }

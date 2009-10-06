@@ -40,6 +40,24 @@ namespace DocumentMallExportConnector
             set { _settings.FileTypeId = value; }
         }
 
+        public string SecurityKey
+        {
+            get { return _settings.SecurityKey; }
+            set { _settings.SecurityKey = value; }
+        }
+
+        public string DocumentType
+        {
+            get { return _settings.DocType; }
+            set { _settings.DocType = value; }
+        }
+
+        public string RepositoryPath
+        {
+            get { return _settings.RepositoryPath; }
+            set { _settings.RepositoryPath = value; }
+        }
+
         public Dictionary<string, string> IndexPairs
         {
             get { return ConvertIndexStringToDictionary(_settings.IndexPairs); }
