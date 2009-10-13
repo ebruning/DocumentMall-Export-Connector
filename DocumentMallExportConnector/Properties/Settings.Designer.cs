@@ -141,5 +141,17 @@ namespace DocumentMallExportConnector.Properties {
                 this["RepositoryPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DocumentName {
+            get {
+                return ((string)(this["DocumentName"]));
+            }
+            set {
+                this["DocumentName"] = value;
+            }
+        }
     }
 }

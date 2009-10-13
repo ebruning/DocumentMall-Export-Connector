@@ -58,37 +58,42 @@ namespace DocumentMallExportConnector
             set { _settings.RepositoryPath = value; }
         }
 
-        public Dictionary<string, string> IndexPairs
+        public string DocumentName
         {
-            get { return ConvertIndexStringToDictionary(_settings.IndexPairs); }
-            set { _settings.IndexPairs = ConvertIndexDictionaryToString(value); }
+            get { return _settings.DocumentName; }
+            set { _settings.DocumentName = value; }
         }
+        //public Dictionary<string, string> IndexPairs
+        //{
+        //    get { return ConvertIndexStringToDictionary(_settings.IndexPairs); }
+        //    set { _settings.IndexPairs = ConvertIndexDictionaryToString(value); }
+        //}
 
-        private Dictionary<string, string> ConvertIndexStringToDictionary(string indexString)
-        {
-            Dictionary<string, string> indexDictionary = new Dictionary<string, string>();
+        //private Dictionary<string, string> ConvertIndexStringToDictionary(string indexString)
+        //{
+        //    Dictionary<string, string> indexDictionary = new Dictionary<string, string>();
 
-            if (string.IsNullOrEmpty(indexString))
-                return indexDictionary;
+        //    if (string.IsNullOrEmpty(indexString))
+        //        return indexDictionary;
 
-            foreach (string s in indexString.Split('|'))
-            {
-                ArrayList tmp = new ArrayList(s.Split(','));
-                indexDictionary.Add(tmp[0].ToString(), tmp[1].ToString());
-            }
-            return indexDictionary;
-        }
+        //    foreach (string s in indexString.Split('|'))
+        //    {
+        //        ArrayList tmp = new ArrayList(s.Split(','));
+        //        indexDictionary.Add(tmp[0].ToString(), tmp[1].ToString());
+        //    }
+        //    return indexDictionary;
+        //}
 
-        private string ConvertIndexDictionaryToString(Dictionary<string, string> indexDictionary)
-        {
-            string indexString = "";
+        //private string ConvertIndexDictionaryToString(Dictionary<string, string> indexDictionary)
+        //{
+        //    string indexString = "";
 
-            foreach (KeyValuePair<string, string> data in indexDictionary)
-            {
-                indexString += string.Format("{0},{1}|", data.Key, data.Value);
-            }
-            return KXP.Tools.Export.TrimPipe(indexString);
-        }
+        //    foreach (KeyValuePair<string, string> data in indexDictionary)
+        //    {
+        //        indexString += string.Format("{0},{1}|", data.Key, data.Value);
+        //    }
+        //    return KXP.Tools.Export.TrimPipe(indexString);
+        //}
 
         #region Save/Reset/Reload Settings
         public void SaveSettings()

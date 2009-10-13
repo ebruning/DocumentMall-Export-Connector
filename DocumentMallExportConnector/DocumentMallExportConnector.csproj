@@ -39,13 +39,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files\Kofax\Kofax Express\bin\Kofax.Eclipse.Base.dll</HintPath>
     </Reference>
+    <Reference Include="Kofax.Eclipse.Tools, Version=1.10.359.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files\Kofax\Kofax Express\bin\Kofax.Eclipse.Tools.dll</HintPath>
+    </Reference>
     <Reference Include="KXP.Export.Controls, Version=1.0.19.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\external\KXP.Export.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="KXP.Tools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\external\KXP.Tools.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

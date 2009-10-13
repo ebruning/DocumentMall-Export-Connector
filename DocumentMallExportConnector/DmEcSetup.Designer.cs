@@ -32,8 +32,17 @@ namespace DocumentMallExportConnector
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnOk = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.txtDocType = new DevExpress.XtraEditors.TextEdit();
+            this.btnFileNameSetup = new DevExpress.XtraEditors.SimpleButton();
+            this.txtDocumentFileName = new DevExpress.XtraEditors.TextEdit();
+            this.bmDocType = new DevExpress.XtraBars.BarManager(this.components);
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.drbDocumentType = new DevExpress.XtraEditors.DropDownButton();
+            this.pmDocType = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
+            this.txtDocType = new DevExpress.XtraEditors.TextEdit();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.txtRepositoryPath = new DevExpress.XtraEditors.TextEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
@@ -49,14 +58,12 @@ namespace DocumentMallExportConnector
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.documentUserControl = new KXP.Export.Controls.DocumentUserControl();
-            this.bmDocType = new DevExpress.XtraBars.BarManager(this.components);
-            this.pmDocType = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.pmFileName = new DevExpress.XtraBars.PopupMenu(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDocumentFileName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bmDocType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pmDocType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDocType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRepositoryPath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSecurityKey.Properties)).BeginInit();
@@ -65,14 +72,13 @@ namespace DocumentMallExportConnector
             ((System.ComponentModel.ISupportInitialize)(this.txtAccount.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bmDocType)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pmDocType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pmFileName)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(396, 424);
+            this.btnCancel.Location = new System.Drawing.Point(396, 477);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 3;
@@ -82,7 +88,7 @@ namespace DocumentMallExportConnector
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(315, 424);
+            this.btnOk.Location = new System.Drawing.Point(315, 477);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 4;
@@ -91,6 +97,9 @@ namespace DocumentMallExportConnector
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.btnFileNameSetup);
+            this.groupControl1.Controls.Add(this.txtDocumentFileName);
+            this.groupControl1.Controls.Add(this.labelControl7);
             this.groupControl1.Controls.Add(this.txtDocType);
             this.groupControl1.Controls.Add(this.drbDocumentType);
             this.groupControl1.Controls.Add(this.labelControl6);
@@ -108,28 +117,67 @@ namespace DocumentMallExportConnector
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(483, 308);
+            this.groupControl1.Size = new System.Drawing.Size(483, 354);
             this.groupControl1.TabIndex = 5;
             this.groupControl1.Text = "DocumentMall";
             // 
-            // txtDocType
+            // btnFileNameSetup
             // 
-            this.txtDocType.Location = new System.Drawing.Point(254, 230);
-            this.txtDocType.Name = "txtDocType";
-            this.txtDocType.Size = new System.Drawing.Size(136, 20);
-            this.txtDocType.TabIndex = 13;
+            this.btnFileNameSetup.Location = new System.Drawing.Point(396, 225);
+            this.btnFileNameSetup.Name = "btnFileNameSetup";
+            this.btnFileNameSetup.Size = new System.Drawing.Size(75, 23);
+            this.btnFileNameSetup.TabIndex = 16;
+            this.btnFileNameSetup.Text = "Setup";
+            this.btnFileNameSetup.Click += new System.EventHandler(this.btnFileNameSetup_Click);
+            // 
+            // txtDocumentFileName
+            // 
+            this.txtDocumentFileName.Location = new System.Drawing.Point(12, 228);
+            this.txtDocumentFileName.MenuManager = this.bmDocType;
+            this.txtDocumentFileName.Name = "txtDocumentFileName";
+            this.txtDocumentFileName.Size = new System.Drawing.Size(378, 20);
+            this.txtDocumentFileName.TabIndex = 15;
+            // 
+            // bmDocType
+            // 
+            this.bmDocType.DockControls.Add(this.barDockControlTop);
+            this.bmDocType.DockControls.Add(this.barDockControlBottom);
+            this.bmDocType.DockControls.Add(this.barDockControlLeft);
+            this.bmDocType.DockControls.Add(this.barDockControlRight);
+            this.bmDocType.Form = this;
+            this.bmDocType.MaxItemId = 1;
             // 
             // drbDocumentType
             // 
-            this.drbDocumentType.Location = new System.Drawing.Point(12, 227);
+            this.drbDocumentType.Location = new System.Drawing.Point(12, 273);
             this.drbDocumentType.Name = "drbDocumentType";
             this.bmDocType.SetPopupContextMenu(this.drbDocumentType, this.pmDocType);
             this.drbDocumentType.Size = new System.Drawing.Size(236, 23);
             this.drbDocumentType.TabIndex = 12;
             // 
+            // pmDocType
+            // 
+            this.pmDocType.Manager = this.bmDocType;
+            this.pmDocType.Name = "pmDocType";
+            // 
+            // labelControl7
+            // 
+            this.labelControl7.Location = new System.Drawing.Point(12, 209);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(94, 13);
+            this.labelControl7.TabIndex = 14;
+            this.labelControl7.Text = "Document file name";
+            // 
+            // txtDocType
+            // 
+            this.txtDocType.Location = new System.Drawing.Point(254, 276);
+            this.txtDocType.Name = "txtDocType";
+            this.txtDocType.Size = new System.Drawing.Size(136, 20);
+            this.txtDocType.TabIndex = 13;
+            // 
             // labelControl6
             // 
-            this.labelControl6.Location = new System.Drawing.Point(12, 208);
+            this.labelControl6.Location = new System.Drawing.Point(12, 254);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(75, 13);
             this.labelControl6.TabIndex = 11;
@@ -146,20 +194,20 @@ namespace DocumentMallExportConnector
             // 
             this.labelControl5.Location = new System.Drawing.Point(12, 163);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(124, 13);
+            this.labelControl5.Size = new System.Drawing.Size(122, 13);
             this.labelControl5.TabIndex = 9;
-            this.labelControl5.Text = "DocumentMall Folder Path";
+            this.labelControl5.Text = "DocumentMall folder path";
             // 
             // txtSecurityKey
             // 
-            this.txtSecurityKey.Location = new System.Drawing.Point(12, 275);
+            this.txtSecurityKey.Location = new System.Drawing.Point(12, 321);
             this.txtSecurityKey.Name = "txtSecurityKey";
             this.txtSecurityKey.Size = new System.Drawing.Size(236, 20);
             this.txtSecurityKey.TabIndex = 8;
             // 
             // labelControl4
             // 
-            this.labelControl4.Location = new System.Drawing.Point(12, 256);
+            this.labelControl4.Location = new System.Drawing.Point(12, 302);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(60, 13);
             this.labelControl4.TabIndex = 7;
@@ -185,9 +233,9 @@ namespace DocumentMallExportConnector
             // 
             this.labelControl3.Location = new System.Drawing.Point(12, 118);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(133, 13);
+            this.labelControl3.Size = new System.Drawing.Size(129, 13);
             this.labelControl3.TabIndex = 4;
-            this.labelControl3.Text = "DocumentMall Watch Folder";
+            this.labelControl3.Text = "DocumentMall watch folder";
             // 
             // txtUser
             // 
@@ -227,7 +275,7 @@ namespace DocumentMallExportConnector
             // 
             this.groupControl2.Controls.Add(this.documentUserControl);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupControl2.Location = new System.Drawing.Point(0, 308);
+            this.groupControl2.Location = new System.Drawing.Point(0, 354);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(483, 106);
             this.groupControl2.TabIndex = 6;
@@ -241,25 +289,16 @@ namespace DocumentMallExportConnector
             this.documentUserControl.Size = new System.Drawing.Size(479, 82);
             this.documentUserControl.TabIndex = 0;
             // 
-            // bmDocType
+            // pmFileName
             // 
-            this.bmDocType.DockControls.Add(this.barDockControlTop);
-            this.bmDocType.DockControls.Add(this.barDockControlBottom);
-            this.bmDocType.DockControls.Add(this.barDockControlLeft);
-            this.bmDocType.DockControls.Add(this.barDockControlRight);
-            this.bmDocType.Form = this;
-            this.bmDocType.MaxItemId = 1;
-            // 
-            // pmDocType
-            // 
-            this.pmDocType.Manager = this.bmDocType;
-            this.pmDocType.Name = "pmDocType";
+            this.pmFileName.Manager = this.bmDocType;
+            this.pmFileName.Name = "pmFileName";
             // 
             // DmEcSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 459);
+            this.ClientSize = new System.Drawing.Size(483, 512);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.btnOk);
@@ -275,6 +314,9 @@ namespace DocumentMallExportConnector
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDocumentFileName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bmDocType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pmDocType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDocType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRepositoryPath.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSecurityKey.Properties)).EndInit();
@@ -283,8 +325,7 @@ namespace DocumentMallExportConnector
             ((System.ComponentModel.ISupportInitialize)(this.txtAccount.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bmDocType)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pmDocType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pmFileName)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -317,6 +358,10 @@ namespace DocumentMallExportConnector
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraBars.PopupMenu pmDocType;
+        private DevExpress.XtraEditors.SimpleButton btnFileNameSetup;
+        private DevExpress.XtraEditors.TextEdit txtDocumentFileName;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
+        private DevExpress.XtraBars.PopupMenu pmFileName;
 
 
 

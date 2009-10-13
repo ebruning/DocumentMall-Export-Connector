@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
-using DevExpress.Utils.Menu;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using Kofax.Eclipse.Base;
+using Kofax.Eclipse.Tools;
 
 namespace DocumentMallExportConnector
 {
@@ -22,6 +23,7 @@ namespace DocumentMallExportConnector
 
             LoadSettings();
             PopulateDocType(indexFields);
+            UpdateFileNameSetupButton(indexFields);
             documentUserControl.DisplayDocumentType(false);
             txtDocType.Enabled = false;
         }
@@ -33,6 +35,7 @@ namespace DocumentMallExportConnector
             txtDestination.Text = _settings.Destination;
             txtSecurityKey.Text = _settings.SecurityKey;
             txtRepositoryPath.Text = _settings.RepositoryPath;
+            txtDocumentFileName.Text = _settings.DocumentName;
             
         }
 
@@ -70,7 +73,7 @@ namespace DocumentMallExportConnector
             _settings.RepositoryPath = txtRepositoryPath.Text;
             _settings.SecurityKey = txtSecurityKey.Text;
             _settings.DocumentType = txtDocType.Enabled ? txtDocType.Text : drbDocumentType.Text;
-
+            _settings.DocumentName = txtDocumentFileName.Text;
             Close();
         }
 
@@ -100,6 +103,76 @@ namespace DocumentMallExportConnector
             {
                 txtDocType.Enabled = false;
                 drbDocumentType.Text = e.Item.Caption;
+            }
+        }
+
+        private void btnFileNameSetup_Click(object sender, EventArgs e)
+        {
+            Point p = PointToScreen(btnFileNameSetup.Location);
+            p.Offset(0, btnFileNameSetup.Height);
+            pmFileName.ShowPopup(p);
+        }
+
+        private void UpdateFileNameSetupButton(IIndexField[] indexFields)
+        {
+            foreach (DefaultName name in DefaultName.GeneralValues)
+                pmFileName.AddItem(CreateBarButtonItem(name));
+
+            BarSubItem dateGroup = new BarSubItem();
+            dateGroup.Name = dateGroup.Caption = DefaultName.DateGroupName;
+            dateGroup.ClearLinks();
+            pmFileName.AddItem(dateGroup);
+            foreach (DefaultName name in DefaultName.DateValues)
+                dateGroup.AddItem(CreateBarButtonItem(name));
+
+            BarSubItem timeGroup = new BarSubItem();
+            timeGroup.Caption = DefaultName.TimeGroupName;
+            timeGroup.ClearLinks();
+            pmFileName.AddItem(timeGroup);
+            foreach (DefaultName name in DefaultName.TimeValues)
+                timeGroup.AddItem(CreateBarButtonItem(name));
+
+            if (indexFields != null && indexFields.Length > 0)
+            {
+                BarSubItem indexGroup = new BarSubItem();
+                indexGroup.Caption = "Index Fields";
+                indexGroup.ClearLinks();
+                pmFileName.AddItem(indexGroup);
+                for (int i = 0; i < indexFields.Length; i++)
+                {
+                    BarButtonItem barButtonItem = new BarButtonItem();
+                    barButtonItem.Caption = DefaultName.IndexValue.DescriptionOf(i + 1) + " - " + indexFields[i].Label;
+                    barButtonItem.Tag = DefaultName.IndexValue.TagOf(i + 1);
+                    barButtonItem.ItemClick += barButtonItem_ItemClick;
+                    indexGroup.AddItem(barButtonItem);
+                }
+            }
+        }
+
+        private BarButtonItem CreateBarButtonItem(DefaultName name)
+        {
+            BarButtonItem barButtonItem = new BarButtonItem();
+            barButtonItem.Caption = name.Description;
+            barButtonItem.Tag = name.Tag;
+            barButtonItem.ItemClick += barButtonItem_ItemClick;
+            return barButtonItem;
+        }
+
+
+        private void barButtonItem_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            string tag = e.Item.Tag as string;
+            if (string.IsNullOrEmpty(tag))
+                txtDocumentFileName.Text = string.Empty;
+                
+            else
+            {
+                int start = txtDocumentFileName.SelectionStart;
+                txtDocumentFileName.Text = txtDocumentFileName.Text.Insert(start, tag);
+                txtDocumentFileName.Focus();
+                txtDocumentFileName.SelectionStart = start + tag.Length;
+                txtDocumentFileName.SelectionLength = 0;
+                txtDocumentFileName.ScrollToCaret();
             }
         }
     }

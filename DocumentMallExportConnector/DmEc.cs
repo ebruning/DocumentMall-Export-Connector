@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Windows.Forms;
 using Kofax.Eclipse.Base;
+using Kofax.Eclipse.Tools;
 
 namespace DocumentMallExportConnector
 {
@@ -17,6 +15,7 @@ namespace DocumentMallExportConnector
         private XmlWriter _xmlData;
         private string _batchFolder = string.Empty;
         private string _documentFolder = string.Empty;
+        private string _batchName;
 
         #region Export Connector definitions
         public string Description
@@ -97,6 +96,7 @@ namespace DocumentMallExportConnector
         {
             //Set the batch folder using the destination, Account and batch name
             _batchFolder = Path.Combine(_releaseSettings.Destination, Path.Combine(_releaseSettings.Account, batch.Name));
+            _batchName = batch.Name;
 
             if (Directory.Exists(_batchFolder))
                 //comment out for release
@@ -112,13 +112,19 @@ namespace DocumentMallExportConnector
 
         public void Release(IDocument doc)
         {
-            string fullyQulifiedFileName = GetPathFile(doc);
+            string[] indexValues = new string[doc.IndexDataCount];
+            for (int i = 0; i < doc.IndexDataCount; i++)
+                indexValues[i] = doc.GetIndexDataValue(i);
 
-            _docConverter.Convert(doc, fullyQulifiedFileName);
 
-            SetDocumentData(doc, fullyQulifiedFileName);
+            string strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, indexValues) + "." + _docConverter.DefaultExtension;
+            string fileName = Utilities.UniqueFileName(Path.Combine(_batchFolder, strName));
 
-            _xmlData.WriteDocumentFileData(Path.GetFileName(fullyQulifiedFileName));
+            _docConverter.Convert(doc, fileName);
+
+            SetDocumentData(doc, fileName);
+
+            _xmlData.WriteDocumentFileData(Path.GetFileName(fileName));
         }
 
         public object StartDocument(IDocument doc)
@@ -183,20 +189,20 @@ namespace DocumentMallExportConnector
             return fullyQulifiedFileName;
         }
 
-        public Dictionary<string,string> GetIndexDictionary(IDocument doc)
-        {
-            Dictionary<string,string> output = new Dictionary<string, string>();
+        //public Dictionary<string,string> GetIndexDictionary(IDocument doc)
+        //{
+        //    Dictionary<string,string> output = new Dictionary<string, string>();
 
-            foreach (KeyValuePair<string, string> index in _releaseSettings.IndexPairs)
-            {
-                for (int i = 0; i < doc.IndexDataCount; i++)
-                {
-                    if (index.Value.Equals(doc.GetIndexDataLabel(i)))
-                        output.Add(index.Key, doc.GetIndexDataValue(i));
-                }
-            }
-            return output;
-        }
+        //    foreach (KeyValuePair<string, string> index in _releaseSettings.IndexPairs)
+        //    {
+        //        for (int i = 0; i < doc.IndexDataCount; i++)
+        //        {
+        //            if (index.Value.Equals(doc.GetIndexDataLabel(i)))
+        //                output.Add(index.Key, doc.GetIndexDataValue(i));
+        //        }
+        //    }
+        //    return output;
+        //}
 
         private string GetDocumentType(IDocument doc)
         {
