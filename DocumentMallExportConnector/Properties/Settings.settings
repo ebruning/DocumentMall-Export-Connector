@@ -15,7 +15,7 @@
       <Value Profile="(Default)">MultiPage</Value>
     </Setting>
     <Setting Name="FileTypeId" Type="System.Guid" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">de32ae85-ff8d-42e5-a8e7-d8ef23684e27</Value>
     </Setting>
     <Setting Name="SingleMultiPage" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>

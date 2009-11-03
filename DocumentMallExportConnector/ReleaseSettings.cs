@@ -36,7 +36,10 @@ namespace DocumentMallExportConnector
 
         public Guid FileTypeId
         {
-            get { return _settings.FileTypeId; }
+            get 
+            {
+                return CheckGuid(_settings.FileTypeId.ToString()) ? _settings.FileTypeId : new Guid();
+            }
             set { _settings.FileTypeId = value; }
         }
 
@@ -94,6 +97,19 @@ namespace DocumentMallExportConnector
         //    }
         //    return KXP.Tools.Export.TrimPipe(indexString);
         //}
+
+        public bool CheckGuid(string guidString)
+        {
+            try
+            {
+                Guid g = new Guid(guidString);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         #region Save/Reset/Reload Settings
         public void SaveSettings()

@@ -73,6 +73,7 @@ namespace DocumentMallExportConnector.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("de32ae85-ff8d-42e5-a8e7-d8ef23684e27")]
         public global::System.Guid FileTypeId {
             get {
                 return ((global::System.Guid)(this["FileTypeId"]));
