@@ -43,9 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files\Kofax\Kofax Express\bin\Kofax.Eclipse.Tools.dll</HintPath>
     </Reference>
-    <Reference Include="KXP.Export.Controls, Version=1.0.19.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="KXP.Export.Controls, Version=1.0.93.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\external\KXP.Export.Controls.dll</HintPath>
+      <HintPath>..\..\KXP_Export_Controls\KXP.Export.Controls\bin\Debug\KXP.Export.Controls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -109,7 +109,7 @@ copy $(ProjectDir)$(OutDir)*.pdb  "c:\Program Files\Kofax\Kofax Express\bin\Rele
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_ConfigurationName="Debug" BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" />
+      <UserProperties BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" BuildVersion_ConfigurationName="Debug" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

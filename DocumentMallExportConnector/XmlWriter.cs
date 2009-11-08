@@ -16,7 +16,7 @@ namespace DocumentMallExportConnector
         public XmlWriter(string destination, string batchId)
         {
             _batchName = batchId;
-            _xmlFileName = Path.Combine(destination, "batch.xml");
+            _xmlFileName = Path.Combine(destination, "Batch.xml");
 
             _xmlWriter = new XmlTextWriter(_xmlFileName, Encoding.UTF8);
             _xmlWriter.Formatting = Formatting.Indented;

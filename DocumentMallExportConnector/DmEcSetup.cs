@@ -6,6 +6,7 @@ using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using Kofax.Eclipse.Base;
 using Kofax.Eclipse.Tools;
+using KXP.Export.Controls;
 
 namespace DocumentMallExportConnector
 {
@@ -20,6 +21,7 @@ namespace DocumentMallExportConnector
             _settings = settings;
 
             documentUserControl.InitializeControl(exporters, _settings.ReleaseMode, _settings.FileTypeId);
+            documentUserControl.HideSingleMultiPage(DocumentUserControl.PageType.Single);
 
             LoadSettings();
             PopulateDocType(indexFields);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 using Kofax.Eclipse.Base;
 using Kofax.Eclipse.Tools;
 
@@ -95,7 +96,7 @@ namespace DocumentMallExportConnector
         public object StartBatch(IBatch batch)
         {
             //Set the batch folder using the destination, Account and batch name
-            _batchFolder = Path.Combine(_releaseSettings.Destination, Path.Combine(_releaseSettings.Account, batch.Name));
+            _batchFolder = Path.Combine(_releaseSettings.Destination, Path.Combine(_releaseSettings.Account, batch.Name + "-" + Environment.MachineName));
             _batchName = batch.Name;
 
             if (Directory.Exists(_batchFolder))
@@ -169,7 +170,7 @@ namespace DocumentMallExportConnector
             if (_releaseSettings.ReleaseMode == ReleaseMode.MultiPage)
                 _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), _releaseSettings.SecurityKey, _releaseSettings.RepositoryPath, GetDocumentType(doc));
             else
-                _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), "seckey", _documentFolder, "doctype");
+                _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), _releaseSettings.SecurityKey, _releaseSettings.RepositoryPath, GetDocumentType(doc));
 
             for (int indexCount = 0; indexCount < doc.IndexDataCount; indexCount++ )
             {
