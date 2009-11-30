@@ -177,5 +177,12 @@ namespace DocumentMallExportConnector
                 txtDocumentFileName.ScrollToCaret();
             }
         }
+
+        private void btnFolderSetup_Click(object sender, EventArgs e)
+        {
+            Point p = PointToScreen(btnFolderSetup.Location);
+            p.Offset(0, btnFolderSetup.Height);
+            pmFolderPath.ShowPopup(p);
+        }
     }
 }

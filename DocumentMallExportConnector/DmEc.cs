@@ -121,8 +121,6 @@ namespace DocumentMallExportConnector
             string strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, indexValues) + "." + _docConverter.DefaultExtension;
             string fileName = Utilities.UniqueFileName(Path.Combine(_batchFolder, strName));
 
-            _docConverter.Convert(doc, fileName);
-
             SetDocumentData(doc, fileName);
 
             _xmlData.WriteDocumentFileData(Path.GetFileName(fileName));
@@ -208,6 +206,7 @@ namespace DocumentMallExportConnector
         private string GetDocumentType(IDocument doc)
         {
             return doc.GetIndexDataValue(_releaseSettings.DocumentType) ?? _releaseSettings.DocumentType;
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using System.Xml;
 
@@ -45,6 +46,9 @@ namespace DocumentMallExportConnector
 
         public void WriteDocumentData(string docName, string securityKey, string path, string docType)
         {
+            if (string.IsNullOrEmpty(docName) || string.IsNullOrEmpty(securityKey) || string.IsNullOrEmpty(path))
+                throw new Exception("Document data is blank");
+
             XmlElement root = _xmldocument.DocumentElement;
             XmlNode bodyNode = root.SelectSingleNode("//*/body");
             XmlElement documentNode = _xmldocument.CreateElement("document");

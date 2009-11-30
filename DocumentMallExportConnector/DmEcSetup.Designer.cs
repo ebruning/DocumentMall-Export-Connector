@@ -32,6 +32,7 @@ namespace DocumentMallExportConnector
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnOk = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.btnFolderSetup = new DevExpress.XtraEditors.SimpleButton();
             this.btnFileNameSetup = new DevExpress.XtraEditors.SimpleButton();
             this.txtDocumentFileName = new DevExpress.XtraEditors.TextEdit();
             this.bmDocType = new DevExpress.XtraBars.BarManager(this.components);
@@ -59,6 +60,7 @@ namespace DocumentMallExportConnector
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.documentUserControl = new KXP.Export.Controls.DocumentUserControl();
             this.pmFileName = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.pmFolderPath = new DevExpress.XtraBars.PopupMenu(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDocumentFileName.Properties)).BeginInit();
@@ -73,6 +75,7 @@ namespace DocumentMallExportConnector
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pmFileName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pmFolderPath)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -97,6 +100,7 @@ namespace DocumentMallExportConnector
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.btnFolderSetup);
             this.groupControl1.Controls.Add(this.btnFileNameSetup);
             this.groupControl1.Controls.Add(this.txtDocumentFileName);
             this.groupControl1.Controls.Add(this.labelControl7);
@@ -120,6 +124,15 @@ namespace DocumentMallExportConnector
             this.groupControl1.Size = new System.Drawing.Size(483, 354);
             this.groupControl1.TabIndex = 5;
             this.groupControl1.Text = "DocumentMall";
+            // 
+            // btnFolderSetup
+            // 
+            this.btnFolderSetup.Location = new System.Drawing.Point(396, 179);
+            this.btnFolderSetup.Name = "btnFolderSetup";
+            this.btnFolderSetup.Size = new System.Drawing.Size(75, 23);
+            this.btnFolderSetup.TabIndex = 17;
+            this.btnFolderSetup.Text = "Setup";
+            this.btnFolderSetup.Click += new System.EventHandler(this.btnFolderSetup_Click);
             // 
             // btnFileNameSetup
             // 
@@ -294,6 +307,11 @@ namespace DocumentMallExportConnector
             this.pmFileName.Manager = this.bmDocType;
             this.pmFileName.Name = "pmFileName";
             // 
+            // pmFolderPath
+            // 
+            this.pmFolderPath.Manager = this.bmDocType;
+            this.pmFolderPath.Name = "pmFolderPath";
+            // 
             // DmEcSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -326,6 +344,7 @@ namespace DocumentMallExportConnector
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pmFileName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pmFolderPath)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -362,6 +381,8 @@ namespace DocumentMallExportConnector
         private DevExpress.XtraEditors.TextEdit txtDocumentFileName;
         private DevExpress.XtraEditors.LabelControl labelControl7;
         private DevExpress.XtraBars.PopupMenu pmFileName;
+        private DevExpress.XtraEditors.SimpleButton btnFolderSetup;
+        private DevExpress.XtraBars.PopupMenu pmFolderPath;
 
 
 
