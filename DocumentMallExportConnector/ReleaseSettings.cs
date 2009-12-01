@@ -66,6 +66,12 @@ namespace DocumentMallExportConnector
             get { return _settings.DocumentName; }
             set { _settings.DocumentName = value; }
         }
+
+        public bool CustomDocType
+        {
+            get { return _settings.CustomDocType; }
+            set { _settings.CustomDocType = value; }
+        }
         //public Dictionary<string, string> IndexPairs
         //{
         //    get { return ConvertIndexStringToDictionary(_settings.IndexPairs); }

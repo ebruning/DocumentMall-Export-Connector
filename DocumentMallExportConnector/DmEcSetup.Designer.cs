@@ -202,6 +202,7 @@ namespace DocumentMallExportConnector
             this.txtRepositoryPath.Name = "txtRepositoryPath";
             this.txtRepositoryPath.Size = new System.Drawing.Size(378, 20);
             this.txtRepositoryPath.TabIndex = 10;
+            this.txtRepositoryPath.ToolTip = "Free form text must be between quotes. ie \"/Invoices/Kofax\"";
             // 
             // labelControl5
             // 

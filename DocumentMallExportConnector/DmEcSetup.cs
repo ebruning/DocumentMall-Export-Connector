@@ -13,6 +13,7 @@ namespace DocumentMallExportConnector
     public partial class DmEcSetup : XtraForm
     {
         readonly ReleaseSettings _settings = new ReleaseSettings();
+        private bool _setupFolderButton = false;
 
         public DmEcSetup(ref ReleaseSettings settings, IEnumerable<IExporter> exporters, IIndexField [] indexFields)
         {
@@ -27,7 +28,6 @@ namespace DocumentMallExportConnector
             PopulateDocType(indexFields);
             UpdateFileNameSetupButton(indexFields);
             documentUserControl.DisplayDocumentType(false);
-            txtDocType.Enabled = false;
         }
 
         private void LoadSettings()
@@ -38,7 +38,8 @@ namespace DocumentMallExportConnector
             txtSecurityKey.Text = _settings.SecurityKey;
             txtRepositoryPath.Text = _settings.RepositoryPath;
             txtDocumentFileName.Text = _settings.DocumentName;
-            
+
+            SetDocumentType();
         }
 
         private void PopulateDocType(IIndexField [] indexFields)
@@ -98,11 +99,13 @@ namespace DocumentMallExportConnector
         {
             if (e.Item.Caption.Equals("Custom Document Type"))
             {
+                _settings.CustomDocType = true;
                 txtDocType.Enabled = true;
                 drbDocumentType.Text = "Custom Document Type";
             }
             else
             {
+                _settings.CustomDocType = false;
                 txtDocType.Enabled = false;
                 drbDocumentType.Text = e.Item.Caption;
             }
@@ -113,17 +116,22 @@ namespace DocumentMallExportConnector
             Point p = PointToScreen(btnFileNameSetup.Location);
             p.Offset(0, btnFileNameSetup.Height);
             pmFileName.ShowPopup(p);
+            _setupFolderButton = false;
         }
 
         private void UpdateFileNameSetupButton(IIndexField[] indexFields)
         {
             foreach (DefaultName name in DefaultName.GeneralValues)
+            {
                 pmFileName.AddItem(CreateBarButtonItem(name));
-
+                pmFolderPath.AddItem(CreateBarButtonItem(name));
+            }
             BarSubItem dateGroup = new BarSubItem();
             dateGroup.Name = dateGroup.Caption = DefaultName.DateGroupName;
             dateGroup.ClearLinks();
             pmFileName.AddItem(dateGroup);
+            pmFolderPath.AddItem(dateGroup);
+
             foreach (DefaultName name in DefaultName.DateValues)
                 dateGroup.AddItem(CreateBarButtonItem(name));
 
@@ -131,6 +139,8 @@ namespace DocumentMallExportConnector
             timeGroup.Caption = DefaultName.TimeGroupName;
             timeGroup.ClearLinks();
             pmFileName.AddItem(timeGroup);
+            pmFolderPath.AddItem(timeGroup);
+
             foreach (DefaultName name in DefaultName.TimeValues)
                 timeGroup.AddItem(CreateBarButtonItem(name));
 
@@ -140,6 +150,8 @@ namespace DocumentMallExportConnector
                 indexGroup.Caption = "Index Fields";
                 indexGroup.ClearLinks();
                 pmFileName.AddItem(indexGroup);
+                pmFolderPath.AddItem(indexGroup);
+
                 for (int i = 0; i < indexFields.Length; i++)
                 {
                     BarButtonItem barButtonItem = new BarButtonItem();
@@ -160,21 +172,35 @@ namespace DocumentMallExportConnector
             return barButtonItem;
         }
 
-
         private void barButtonItem_ItemClick(object sender, ItemClickEventArgs e)
         {
             string tag = e.Item.Tag as string;
             if (string.IsNullOrEmpty(tag))
-                txtDocumentFileName.Text = string.Empty;
+                if(_setupFolderButton)
+                    txtRepositoryPath.Text = string.Empty;
+                else
+                    txtDocumentFileName.Text = string.Empty;
                 
             else
             {
-                int start = txtDocumentFileName.SelectionStart;
-                txtDocumentFileName.Text = txtDocumentFileName.Text.Insert(start, tag);
-                txtDocumentFileName.Focus();
-                txtDocumentFileName.SelectionStart = start + tag.Length;
-                txtDocumentFileName.SelectionLength = 0;
-                txtDocumentFileName.ScrollToCaret();
+                if (_setupFolderButton)
+                {
+                    int start = txtRepositoryPath.SelectionStart;
+                    txtRepositoryPath.Text = txtRepositoryPath.Text.Insert(start, tag);
+                    txtRepositoryPath.Focus();
+                    txtRepositoryPath.SelectionStart = start + tag.Length;
+                    txtRepositoryPath.SelectionLength = 0;
+                    txtRepositoryPath.ScrollToCaret();
+                }
+                else
+                {
+                    int start = txtDocumentFileName.SelectionStart;
+                    txtDocumentFileName.Text = txtDocumentFileName.Text.Insert(start, tag);
+                    txtDocumentFileName.Focus();
+                    txtDocumentFileName.SelectionStart = start + tag.Length;
+                    txtDocumentFileName.SelectionLength = 0;
+                    txtDocumentFileName.ScrollToCaret();
+                }
             }
         }
 
@@ -183,6 +209,23 @@ namespace DocumentMallExportConnector
             Point p = PointToScreen(btnFolderSetup.Location);
             p.Offset(0, btnFolderSetup.Height);
             pmFolderPath.ShowPopup(p);
+            _setupFolderButton = true;
+        }
+
+        private void SetDocumentType()
+        {
+            if (_settings.CustomDocType)
+            {
+                drbDocumentType.Text = "Custom Document Type";
+                txtDocType.Text = _settings.DocumentType;
+                txtDocType.Enabled = true;
+            }
+            else
+            {
+                drbDocumentType.Text = _settings.DocumentType;
+                txtDocType.Enabled = false;
+            }
+
         }
     }
 }

@@ -154,5 +154,17 @@ namespace DocumentMallExportConnector.Properties {
                 this["DocumentName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CustomDocType {
+            get {
+                return ((bool)(this["CustomDocType"]));
+            }
+            set {
+                this["CustomDocType"] = value;
+            }
+        }
     }
 }
