@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using System.Xml;
 using Kofax.Eclipse.Base;
 using Kofax.Eclipse.Tools;
 
@@ -43,9 +42,9 @@ namespace DocumentMallExportConnector
         public ReleaseMode WorkingMode
         {
             get { return _releaseSettings.ReleaseMode; }
-        } 
+        }
         #endregion
-        
+
         #region Settings
         public void DeserializeSettings(Stream input)
         {
@@ -58,20 +57,20 @@ namespace DocumentMallExportConnector
 
         }
 
-        public void Setup(IList<IExporter> exporters, IIndexField[] indexFields, 
+        public void Setup(IList<IExporter> exporters, IIndexField[] indexFields,
                           IDictionary<string, string> releaseData)
         {
-            DmEcSetup setup = new DmEcSetup( ref _releaseSettings, exporters, indexFields);
+            DmEcSetup setup = new DmEcSetup(ref _releaseSettings, exporters, indexFields);
             setup.ShowDialog();
 
-        } 
+        }
         #endregion
 
-        public object StartRelease(IList<IExporter> exporters, 
-                                   IIndexField[] indexFields, 
+        public object StartRelease(IList<IExporter> exporters,
+                                   IIndexField[] indexFields,
                                    IDictionary<string, string> releaseData)
         {
-            if(string.IsNullOrEmpty(_releaseSettings.Destination))
+            if (string.IsNullOrEmpty(_releaseSettings.Destination))
                 throw new Exception("Please specify a release destination");
 
             _docConverter = null;
@@ -85,7 +84,7 @@ namespace DocumentMallExportConnector
                         _pageConverter = exporter as IPageOutputConverter;
                     else
                         _docConverter = exporter as IDocumentOutputConverter;
-                }   
+                }
             }
 
             if (_pageConverter == null && _docConverter == null)
@@ -93,7 +92,7 @@ namespace DocumentMallExportConnector
 
             return null;
         }
-        
+
         public object StartBatch(IBatch batch)
         {
             //Set the batch folder using the destination, Account and batch name
@@ -101,13 +100,12 @@ namespace DocumentMallExportConnector
             _batchName = batch.Name;
 
             if (Directory.Exists(_batchFolder))
-                //comment out for release
-                Directory.Delete(_batchFolder, true);
-            //    throw new Exception("Batch folder already exists");
+                throw new Exception("Batch folder already exists");
 
             Directory.CreateDirectory(_batchFolder);
             _xmlData = new XmlWriter(_batchFolder, batch.Name);
             _xmlData.WriteBatchHeader(DateTime.Now.ToShortDateString(), _releaseSettings.Account, _releaseSettings.User);
+
 
             return null;
         }
@@ -118,23 +116,31 @@ namespace DocumentMallExportConnector
             for (int i = 0; i < doc.IndexDataCount; i++)
                 indexValues[i] = doc.GetIndexDataValue(i);
 
-
             string strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, indexValues) + "." + _docConverter.DefaultExtension;
             string fileName = Utilities.UniqueFileName(Path.Combine(_batchFolder, strName));
+
+            _docConverter.Convert(doc, fileName);
 
             SetDocumentData(doc, fileName);
 
             _xmlData.WriteDocumentFileData(Path.GetFileName(fileName));
         }
 
+        private string strName = string.Empty;
+
         public object StartDocument(IDocument doc)
         {
+            string[] indexValues = new string[doc.IndexDataCount];
+            for (int i = 0; i < doc.IndexDataCount; i++)
+                indexValues[i] = doc.GetIndexDataValue(i);
+
             _documentFolder = Path.Combine(_batchFolder, doc.Number.ToString());
 
             string fullyQulifiedFileName = GetPathFile(doc);
+            strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, indexValues) + "." + _pageConverter.DefaultExtension;
 
             SetDocumentData(doc, fullyQulifiedFileName);
-            
+
             if (!Directory.Exists(_documentFolder))
                 Directory.CreateDirectory(_documentFolder);
 
@@ -143,14 +149,14 @@ namespace DocumentMallExportConnector
 
         public void Release(IPage page)
         {
-            string outputFileName = Path.Combine(_documentFolder, page.Number.ToString());
-            string fullyQulifiedFileName = Path.ChangeExtension(outputFileName, _pageConverter.DefaultExtension);
 
-            _pageConverter.Convert(page, fullyQulifiedFileName);
+            string _singlePageName = Utilities.UniqueFileName(Path.Combine(_batchFolder, strName));
 
-            _xmlData.WriteDocumentFileData(fullyQulifiedFileName);
+            _pageConverter.Convert(page, _singlePageName);
+
+            _xmlData.WriteDocumentFileData(_singlePageName);
         }
-        
+
         public void EndDocument(IDocument doc, object handle, ReleaseResult result)
         {
         }
@@ -167,11 +173,11 @@ namespace DocumentMallExportConnector
         public void SetDocumentData(IDocument doc, string fullyQulifiedFileName)
         {
             if (_releaseSettings.ReleaseMode == ReleaseMode.MultiPage)
-                _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), _releaseSettings.SecurityKey, _releaseSettings.RepositoryPath, GetDocumentType(doc));
+                _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), _releaseSettings.SecurityKey, ConvertRepositoryPath(doc), GetDocumentType(doc));
             else
-                _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), _releaseSettings.SecurityKey, _releaseSettings.RepositoryPath, GetDocumentType(doc));
+                _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), _releaseSettings.SecurityKey, ConvertRepositoryPath(doc), GetDocumentType(doc));
 
-            for (int indexCount = 0; indexCount < doc.IndexDataCount; indexCount++ )
+            for (int indexCount = 0; indexCount < doc.IndexDataCount; indexCount++)
             {
                 if (doc.GetIndexDataValue(indexCount) != GetDocumentType(doc))
                     _xmlData.WriteDocumentIndexData(doc.GetIndexDataLabel(indexCount), doc.GetIndexDataValue(indexCount), fullyQulifiedFileName);
@@ -180,10 +186,10 @@ namespace DocumentMallExportConnector
 
         public string GetPathFile(IDocument doc)
         {
-            string outputFileName = _releaseSettings.ReleaseMode == ReleaseMode.SinglePage ? Path.Combine(_documentFolder, doc.Number.ToString()) 
+            string outputFileName = _releaseSettings.ReleaseMode == ReleaseMode.SinglePage ? Path.Combine(_documentFolder, doc.Number.ToString())
                                                                                            : Path.Combine(_batchFolder, doc.Number.ToString());
 
-            string fullyQulifiedFileName = _releaseSettings.ReleaseMode == ReleaseMode.SinglePage ? Path.ChangeExtension(outputFileName, _pageConverter.DefaultExtension) 
+            string fullyQulifiedFileName = _releaseSettings.ReleaseMode == ReleaseMode.SinglePage ? Path.ChangeExtension(outputFileName, _pageConverter.DefaultExtension)
                                                                                            : Path.ChangeExtension(outputFileName, _docConverter.DefaultExtension);
 
             return fullyQulifiedFileName;
@@ -204,10 +210,18 @@ namespace DocumentMallExportConnector
         //    return output;
         //}
 
+        private string ConvertRepositoryPath(IDocument doc)
+        {
+            string[] indexValues = new string[doc.IndexDataCount];
+            for (int i = 0; i < doc.IndexDataCount; i++)
+                indexValues[i] = doc.GetIndexDataValue(i);
+
+            return DefaultName.CalculateDefaultName(_releaseSettings.RepositoryPath, _batchName, doc.Number, indexValues);
+        }
+
         private string GetDocumentType(IDocument doc)
         {
             return doc.GetIndexDataValue(_releaseSettings.DocumentType) ?? _releaseSettings.DocumentType;
-
         }
     }
 }
