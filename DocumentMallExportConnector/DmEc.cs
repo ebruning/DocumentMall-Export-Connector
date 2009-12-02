@@ -138,12 +138,12 @@ namespace DocumentMallExportConnector
             for (int i = 0; i < doc.IndexDataCount; i++)
                 indexValues[i] = doc.GetIndexDataValue(i);
 
-            _documentFolder = Path.Combine(_batchFolder, doc.Number.ToString());
-            if (!Directory.Exists(_documentFolder))
-                Directory.CreateDirectory(_documentFolder);
+            //_documentFolder = Path.Combine(_batchFolder, doc.Number.ToString());
+            if (!Directory.Exists(_batchFolder))
+                Directory.CreateDirectory(_batchFolder);
 
             //string fullyQulifiedFileName = GetPathFile(doc);
-            _strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, indexValues) + "." + _pageConverter.DefaultExtension;
+            _strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, indexValues);
             _docNumber = doc.Number.ToString();
             _docRepositoryPath = ConvertRepositoryPath(doc);
             _docType = GetDocumentType(doc);
@@ -162,7 +162,7 @@ namespace DocumentMallExportConnector
         {
 
             //string _singlePageName = Utilities.UniqueFileName(Path.Combine(_batchFolder, strName));
-            string _singlePageName = Utilities.UniqueFileName(Path.Combine(_documentFolder, _strName));
+            string _singlePageName = Utilities.UniqueFileName(Path.Combine(_batchFolder, _strName) + "-" + page.Number + "." + _pageConverter.DefaultExtension);
             _pageConverter.Convert(page, _singlePageName);
 
             //_xmlData.WriteDocumentFileDataMultiPage(_singlePageName);

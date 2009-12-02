@@ -172,7 +172,7 @@ namespace DocumentMallExportConnector
 
             //WriteChildNode(fileNode, "fname", Path.GetFileName(fileName));
             //WriteChildNode(fileNode, "format", Path.GetExtension(fileName).TrimStart('.')); 
-            WriteChildNode(fileNode, "fname", fileName);
+            WriteChildNode(fileNode, "fname", Path.GetFileName(fileName));
             WriteChildNode(fileNode, "format", Path.GetExtension(fileName).TrimStart('.'));
             contentNode.AppendChild(fileNode);
         }
