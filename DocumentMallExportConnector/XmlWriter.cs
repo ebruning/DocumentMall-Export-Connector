@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -73,15 +74,12 @@ namespace DocumentMallExportConnector
             documentNode.AppendChild(docTypeNode);
         }
 
-        public void WriteDocumentIndexData(string indexName, string indexValue, string documentName, bool multipage)
+        public void WriteDocumentIndexData(string indexName, string indexValue, string documentName)
         {
             XmlElement root = _xmldocument.DocumentElement;
             XmlNode indexNode;
 
-            if(multipage)
-                indexNode = root.SelectSingleNode("//*/document[name='" + Path.GetFileName(documentName) + "']/doctype");
-            else
-                indexNode = root.SelectSingleNode("//*/document[name='" + documentName + "']/doctype");
+            indexNode = root.SelectSingleNode("//*/document[name='" + Path.GetFileName(documentName) + "']/doctype");
             
             XmlElement indexElement = _xmldocument.CreateElement("index");
 
@@ -120,7 +118,7 @@ namespace DocumentMallExportConnector
             contentNode.AppendChild(fileNode);
         }
 
-        public void WriteDocumentDataIndexFileSinglePage(string docName, string securityKey, string path, string docType, )
+        public void WriteDocumentDataIndexFileSinglePage(string docName, string securityKey, string path, string docType, ArrayList indexArray, string fileName)
         {
             if (string.IsNullOrEmpty(docName) || string.IsNullOrEmpty(securityKey) || string.IsNullOrEmpty(path))
                 throw new Exception("Document data is blank");
@@ -149,14 +147,34 @@ namespace DocumentMallExportConnector
             documentNode.AppendChild(docTypeNode);
 
             //XmlElement root = _xmldocument.DocumentElement;
-            XmlNode indexNode = root.SelectSingleNode("//*/document[name='" + docName + "']/doctype");
+            //XmlNode indexNode = root.SelectSingleNode("//*/document[name='" + docName + "']/doctype");
 
             XmlElement indexElement = _xmldocument.CreateElement("index");
 
-            WriteChildNode(indexElement, "iname", indexName);
-            WriteChildNode(indexElement, "ivalue", indexValue);
-            indexNode.AppendChild(indexElement);
+            foreach (string list in indexArray)
+            {
+                string[] data = list.Split(',');
 
+                WriteChildNode(indexElement, "iname", data[0]);
+                WriteChildNode(indexElement, "ivalue", data[1]);
+            }
+
+            //indexNode.AppendChild(indexElement);
+            documentNode.AppendChild(indexElement);
+
+            //XmlElement root = _xmldocument.DocumentElement;
+            //XmlNode documentNode = root.SelectSingleNode("//*/document[name='" + document + "']");
+            XmlElement contentNode = _xmldocument.CreateElement("content");
+
+            documentNode.AppendChild(contentNode);
+
+            XmlElement fileNode = _xmldocument.CreateElement("file");
+
+            //WriteChildNode(fileNode, "fname", Path.GetFileName(fileName));
+            //WriteChildNode(fileNode, "format", Path.GetExtension(fileName).TrimStart('.')); 
+            WriteChildNode(fileNode, "fname", fileName);
+            WriteChildNode(fileNode, "format", Path.GetExtension(fileName).TrimStart('.'));
+            contentNode.AppendChild(fileNode);
         }
 
         public void CloseXml()

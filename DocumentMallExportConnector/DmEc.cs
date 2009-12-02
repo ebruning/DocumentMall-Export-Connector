@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -105,8 +106,7 @@ namespace DocumentMallExportConnector
             Directory.CreateDirectory(_batchFolder);
             _xmlData = new XmlWriter(_batchFolder, batch.Name);
             _xmlData.WriteBatchHeader(DateTime.Now.ToShortDateString(), _releaseSettings.Account, _releaseSettings.User);
-
-
+            
             return null;
         }
 
@@ -121,13 +121,17 @@ namespace DocumentMallExportConnector
 
             _docConverter.Convert(doc, fileName);
 
-            SetDocumentData(doc, fileName);
+            SetDocumentDataMultiPage(doc, fileName);
 
             _xmlData.WriteDocumentFileDataMultiPage(Path.GetFileName(fileName));
         }
 
         private string _strName = string.Empty;
+        ArrayList _indexArray = new ArrayList();
         private string _docNumber = string.Empty;
+        private string _docRepositoryPath = string.Empty;
+        private string _docType = string.Empty;
+
         public object StartDocument(IDocument doc)
         {
             string[] indexValues = new string[doc.IndexDataCount];
@@ -140,9 +144,17 @@ namespace DocumentMallExportConnector
 
             //string fullyQulifiedFileName = GetPathFile(doc);
             _strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, indexValues) + "." + _pageConverter.DefaultExtension;
-
-            //SetDocumentData(doc, null);
             _docNumber = doc.Number.ToString();
+            _docRepositoryPath = ConvertRepositoryPath(doc);
+            _docType = GetDocumentType(doc);
+
+            _indexArray.Clear();
+
+            for (int i = 0; i < doc.IndexDataCount; i++)
+            {
+                _indexArray.Add(string.Format("{0},{1}", doc.GetIndexDataLabel(i), doc.GetIndexDataValue(i)));
+            }
+
             return null;
         }
 
@@ -155,6 +167,8 @@ namespace DocumentMallExportConnector
 
             //_xmlData.WriteDocumentFileDataMultiPage(_singlePageName);
             //_xmlData.WriteDocumentFileDataSinglePage(_docNumber, _singlePageName);
+
+            _xmlData.WriteDocumentDataIndexFileSinglePage(_docNumber, _releaseSettings.SecurityKey, _docRepositoryPath, _docType, _indexArray, _singlePageName);
         }
 
         public void EndDocument(IDocument doc, object handle, ReleaseResult result)
@@ -170,21 +184,15 @@ namespace DocumentMallExportConnector
         {
         }
 
-        public void SetDocumentData(IDocument doc, string fullyQulifiedFileName)
+        public void SetDocumentDataMultiPage(IDocument doc, string fullyQulifiedFileName)
         {
-            if (_releaseSettings.ReleaseMode == ReleaseMode.MultiPage)
-                _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), _releaseSettings.SecurityKey, ConvertRepositoryPath(doc), GetDocumentType(doc));
-            else
-                _xmlData.WriteDocumentData(doc.Number.ToString(), _releaseSettings.SecurityKey, ConvertRepositoryPath(doc), GetDocumentType(doc));
+            _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), _releaseSettings.SecurityKey, ConvertRepositoryPath(doc), GetDocumentType(doc));
 
             for (int indexCount = 0; indexCount < doc.IndexDataCount; indexCount++)
             {
                 if (doc.GetIndexDataValue(indexCount) != GetDocumentType(doc))
                 {
-                    if (_releaseSettings.ReleaseMode == ReleaseMode.MultiPage)
-                        _xmlData.WriteDocumentIndexData(doc.GetIndexDataLabel(indexCount), doc.GetIndexDataValue(indexCount), fullyQulifiedFileName, true);
-                    else
-                        _xmlData.WriteDocumentIndexData(doc.GetIndexDataLabel(indexCount), doc.GetIndexDataValue(indexCount), doc.Number.ToString(), false);
+                    _xmlData.WriteDocumentIndexData(doc.GetIndexDataLabel(indexCount), doc.GetIndexDataValue(indexCount), fullyQulifiedFileName);
                 }
             }
         }
