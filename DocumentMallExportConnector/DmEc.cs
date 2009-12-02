@@ -123,11 +123,11 @@ namespace DocumentMallExportConnector
 
             SetDocumentData(doc, fileName);
 
-            _xmlData.WriteDocumentFileData(Path.GetFileName(fileName));
+            _xmlData.WriteDocumentFileDataMultiPage(Path.GetFileName(fileName));
         }
 
-        private string strName = string.Empty;
-
+        private string _strName = string.Empty;
+        private string _docNumber = string.Empty;
         public object StartDocument(IDocument doc)
         {
             string[] indexValues = new string[doc.IndexDataCount];
@@ -135,26 +135,26 @@ namespace DocumentMallExportConnector
                 indexValues[i] = doc.GetIndexDataValue(i);
 
             _documentFolder = Path.Combine(_batchFolder, doc.Number.ToString());
-
-            string fullyQulifiedFileName = GetPathFile(doc);
-            strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, indexValues) + "." + _pageConverter.DefaultExtension;
-
-            SetDocumentData(doc, fullyQulifiedFileName);
-
             if (!Directory.Exists(_documentFolder))
                 Directory.CreateDirectory(_documentFolder);
 
+            //string fullyQulifiedFileName = GetPathFile(doc);
+            _strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, indexValues) + "." + _pageConverter.DefaultExtension;
+
+            //SetDocumentData(doc, null);
+            _docNumber = doc.Number.ToString();
             return null;
         }
 
         public void Release(IPage page)
         {
 
-            string _singlePageName = Utilities.UniqueFileName(Path.Combine(_batchFolder, strName));
-
+            //string _singlePageName = Utilities.UniqueFileName(Path.Combine(_batchFolder, strName));
+            string _singlePageName = Utilities.UniqueFileName(Path.Combine(_documentFolder, _strName));
             _pageConverter.Convert(page, _singlePageName);
 
-            _xmlData.WriteDocumentFileData(_singlePageName);
+            //_xmlData.WriteDocumentFileDataMultiPage(_singlePageName);
+            //_xmlData.WriteDocumentFileDataSinglePage(_docNumber, _singlePageName);
         }
 
         public void EndDocument(IDocument doc, object handle, ReleaseResult result)
@@ -175,12 +175,17 @@ namespace DocumentMallExportConnector
             if (_releaseSettings.ReleaseMode == ReleaseMode.MultiPage)
                 _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), _releaseSettings.SecurityKey, ConvertRepositoryPath(doc), GetDocumentType(doc));
             else
-                _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), _releaseSettings.SecurityKey, ConvertRepositoryPath(doc), GetDocumentType(doc));
+                _xmlData.WriteDocumentData(doc.Number.ToString(), _releaseSettings.SecurityKey, ConvertRepositoryPath(doc), GetDocumentType(doc));
 
             for (int indexCount = 0; indexCount < doc.IndexDataCount; indexCount++)
             {
                 if (doc.GetIndexDataValue(indexCount) != GetDocumentType(doc))
-                    _xmlData.WriteDocumentIndexData(doc.GetIndexDataLabel(indexCount), doc.GetIndexDataValue(indexCount), fullyQulifiedFileName);
+                {
+                    if (_releaseSettings.ReleaseMode == ReleaseMode.MultiPage)
+                        _xmlData.WriteDocumentIndexData(doc.GetIndexDataLabel(indexCount), doc.GetIndexDataValue(indexCount), fullyQulifiedFileName, true);
+                    else
+                        _xmlData.WriteDocumentIndexData(doc.GetIndexDataLabel(indexCount), doc.GetIndexDataValue(indexCount), doc.Number.ToString(), false);
+                }
             }
         }
 

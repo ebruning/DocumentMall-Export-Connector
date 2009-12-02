@@ -22,7 +22,7 @@ namespace DocumentMallExportConnector
             _settings = settings;
 
             documentUserControl.InitializeControl(exporters, _settings.ReleaseMode, _settings.FileTypeId);
-            documentUserControl.HideSingleMultiPage(DocumentUserControl.PageType.Single);
+            //documentUserControl.HideSingleMultiPage(DocumentUserControl.PageType.Single);
 
             LoadSettings();
             PopulateDocType(indexFields);
