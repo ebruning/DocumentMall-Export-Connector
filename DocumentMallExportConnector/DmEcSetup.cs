@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
@@ -67,17 +68,21 @@ namespace DocumentMallExportConnector
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            _settings.User = txtUser.Text;
-            _settings.Account = txtAccount.Text;
-            _settings.Destination = txtDestination.Text;
 
-            _settings.FileTypeId = documentUserControl.FileTypeId;
-            _settings.ReleaseMode = documentUserControl.GetSingleMiltiPage();
-            _settings.RepositoryPath = txtRepositoryPath.Text;
-            _settings.SecurityKey = txtSecurityKey.Text;
-            _settings.DocumentType = txtDocType.Enabled ? txtDocType.Text : drbDocumentType.Text;
-            _settings.DocumentName = txtDocumentFileName.Text;
-            Close();
+            if (ValidateForm())
+            {
+                _settings.User = txtUser.Text;
+                _settings.Account = txtAccount.Text;
+                _settings.Destination = txtDestination.Text;
+
+                _settings.FileTypeId = documentUserControl.FileTypeId;
+                _settings.ReleaseMode = documentUserControl.GetSingleMiltiPage();
+                _settings.RepositoryPath = txtRepositoryPath.Text;
+                _settings.SecurityKey = txtSecurityKey.Text;
+                _settings.DocumentType = txtDocType.Enabled ? txtDocType.Text : drbDocumentType.Text;
+                _settings.DocumentName = txtDocumentFileName.Text;
+                Close();
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -226,6 +231,68 @@ namespace DocumentMallExportConnector
                 txtDocType.Enabled = false;
             }
 
+        }
+
+        private void txtRepositoryPath_EditValueChanged(object sender, EventArgs e)
+        {
+            txtRepositoryPath.ForeColor = DefaultName.IsValid(txtRepositoryPath.Text) ? Color.Empty : Color.Red;
+        }
+
+        private void txtDocumentFileName_EditValueChanged(object sender, EventArgs e)
+        {
+            txtDocumentFileName.ForeColor = DefaultName.IsValid(txtDocumentFileName.Text) ? Color.Empty : Color.Red;
+        }
+
+        internal bool ValidateForm()
+        {
+            if (string.IsNullOrEmpty(txtAccount.Text))
+            {
+                ErrorMessage("Account cannot be blank.", MessageBoxIcon.Warning);
+                txtAccount.Focus();
+                return false;
+            }
+            
+            if (string.IsNullOrEmpty(txtUser.Text))
+            {
+                ErrorMessage("User cannot be blank.", MessageBoxIcon.Warning);
+                txtUser.Focus();
+                return false;
+            }
+            
+            if (string.IsNullOrEmpty(txtDestination.Text))
+            {
+                ErrorMessage("Invalid folder", MessageBoxIcon.Warning);
+                txtDestination.Focus();
+                return false;
+            }       
+            
+            if (string.IsNullOrEmpty(txtDocumentFileName.Text) || !DefaultName.IsValid(txtDocumentFileName.Text))
+            {
+                ErrorMessage("Invalid file name", MessageBoxIcon.Warning);
+                txtDocumentFileName.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(txtDocType.Text) && drbDocumentType.Text == "Custom Document Type")
+            {
+                ErrorMessage("Invalid document type", MessageBoxIcon.Warning);
+                txtDocType.Focus();
+                return false;
+            }                
+              
+
+            return true;
+        }
+
+        internal void ErrorMessage(string msg, MessageBoxIcon icon)
+        {
+            string caption = "Error";
+            XtraMessageBox.Show(this,
+                                msg,
+                                caption,
+                                MessageBoxButtons.OK,
+                                icon,
+                                MessageBoxDefaultButton.Button1);
         }
     }
 }

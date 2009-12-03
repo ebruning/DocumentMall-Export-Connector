@@ -150,6 +150,7 @@ namespace DocumentMallExportConnector
             this.txtDocumentFileName.Name = "txtDocumentFileName";
             this.txtDocumentFileName.Size = new System.Drawing.Size(378, 20);
             this.txtDocumentFileName.TabIndex = 15;
+            this.txtDocumentFileName.EditValueChanged += new System.EventHandler(this.txtDocumentFileName_EditValueChanged);
             // 
             // bmDocType
             // 
@@ -203,6 +204,7 @@ namespace DocumentMallExportConnector
             this.txtRepositoryPath.Size = new System.Drawing.Size(378, 20);
             this.txtRepositoryPath.TabIndex = 10;
             this.txtRepositoryPath.ToolTip = "Free form text must be between quotes. ie \"/Invoices/Kofax\"";
+            this.txtRepositoryPath.EditValueChanged += new System.EventHandler(this.txtRepositoryPath_EditValueChanged);
             // 
             // labelControl5
             // 
