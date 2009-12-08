@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using Kofax.Eclipse.Base;
-using Kofax.Eclipse.Tools;
+using Kofax.VRS.UI.Common.Tools;
 
 namespace DocumentMallExportConnector
 {

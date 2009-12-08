@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using Kofax.Eclipse.Base;
-using Kofax.Eclipse.Tools;
+using Kofax.VRS.UI.Common.Tools;
 using KXP.Export.Controls;
 
 namespace DocumentMallExportConnector
@@ -279,8 +279,7 @@ namespace DocumentMallExportConnector
                 txtDocType.Focus();
                 return false;
             }                
-              
-
+     
             return true;
         }
 
