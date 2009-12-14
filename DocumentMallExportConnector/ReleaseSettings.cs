@@ -1,110 +1,84 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using DocumentMallExportConnector.Properties;
 using Kofax.Eclipse.Base;
 
 namespace DocumentMallExportConnector
 {
     public class ReleaseSettings
     {
-        readonly Settings _settings = new Settings();
-
+        private string m_User;
         public string User
         {
-            get { return _settings.User; }
-            set { _settings.User = value; }
+            get { return m_User; }
+            set { m_User = value; }
         }
 
+        private string m_Account;
         public string Account
         {
-            get { return _settings.Account; }
-            set { _settings.Account = value; }
+            get { return m_Account; }
+            set { m_Account = value; }
         }
 
+        private string m_Destination;
         public string Destination
         {
-            get { return _settings.Destination; }
-            set { _settings.Destination = value; }
+            get { return m_Destination; }
+            set { m_Destination = value; }
         }
 
+        private ReleaseMode m_ReleaseMode;
         public ReleaseMode ReleaseMode
         {
-            get { return _settings.ReleaseMode; }
-            set { _settings.ReleaseMode = value; }
+            get { return m_ReleaseMode; }
+            set { m_ReleaseMode = value; }
         }
 
+        private Guid m_FileTypeId;
         public Guid FileTypeId
         {
             get 
             {
-                return CheckGuid(_settings.FileTypeId.ToString()) ? _settings.FileTypeId : new Guid();
+                return CheckGuid(m_FileTypeId.ToString()) ? m_FileTypeId : new Guid();
             }
-            set { _settings.FileTypeId = value; }
+            set { m_FileTypeId = value; }
         }
 
+        private string m_SecurityKey;
         public string SecurityKey
         {
-            get { return _settings.SecurityKey; }
-            set { _settings.SecurityKey = value; }
+            get { return m_SecurityKey; }
+            set { m_SecurityKey = value; }
         }
 
+        private string m_DocumentType;
         public string DocumentType
         {
-            get { return _settings.DocType; }
-            set { _settings.DocType = value; }
+            get { return m_DocumentType; }
+            set { m_DocumentType = value; }
         }
 
+        private string m_RepositoryPath;
         public string RepositoryPath
         {
-            get { return _settings.RepositoryPath; }
-            set { _settings.RepositoryPath = value; }
+            get { return m_RepositoryPath; }
+            set { m_RepositoryPath = value; }
         }
 
+        private string m_DocumentName;
         public string DocumentName
         {
-            get { return _settings.DocumentName; }
-            set { _settings.DocumentName = value; }
+            get { return m_DocumentName; }
+            set { m_DocumentName = value; }
         }
 
+        private bool m_CustomDocType;
         public bool CustomDocType
         {
-            get { return _settings.CustomDocType; }
-            set { _settings.CustomDocType = value; }
+            get { return m_CustomDocType; }
+            set { m_CustomDocType = value; }
         }
-        //public Dictionary<string, string> IndexPairs
-        //{
-        //    get { return ConvertIndexStringToDictionary(_settings.IndexPairs); }
-        //    set { _settings.IndexPairs = ConvertIndexDictionaryToString(value); }
-        //}
 
-        //private Dictionary<string, string> ConvertIndexStringToDictionary(string indexString)
-        //{
-        //    Dictionary<string, string> indexDictionary = new Dictionary<string, string>();
-
-        //    if (string.IsNullOrEmpty(indexString))
-        //        return indexDictionary;
-
-        //    foreach (string s in indexString.Split('|'))
-        //    {
-        //        ArrayList tmp = new ArrayList(s.Split(','));
-        //        indexDictionary.Add(tmp[0].ToString(), tmp[1].ToString());
-        //    }
-        //    return indexDictionary;
-        //}
-
-        //private string ConvertIndexDictionaryToString(Dictionary<string, string> indexDictionary)
-        //{
-        //    string indexString = "";
-
-        //    foreach (KeyValuePair<string, string> data in indexDictionary)
-        //    {
-        //        indexString += string.Format("{0},{1}|", data.Key, data.Value);
-        //    }
-        //    return KXP.Tools.Export.TrimPipe(indexString);
-        //}
-
-        public bool CheckGuid(string guidString)
+        public static bool CheckGuid(string guidString)
         {
             try
             {
@@ -116,29 +90,5 @@ namespace DocumentMallExportConnector
                 return false;
             }
         }
-
-        #region Save/Reset/Reload Settings
-        public void SaveSettings()
-        {
-            _settings.Save();
-        }
-
-        /// <summary>
-        /// Resets the values to the default settings
-        /// </summary>
-        public void ResetSettings()
-        {
-            _settings.Reset();
-        }
-
-        /// <summary>
-        /// Reloads the values from storage
-        /// </summary>
-        public void ReloadSettings()
-        {
-            _settings.Reload();
-        } 
-        #endregion
-
     }
 }

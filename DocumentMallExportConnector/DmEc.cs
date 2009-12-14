@@ -53,13 +53,19 @@ namespace DocumentMallExportConnector
         #region Settings
         public void DeserializeSettings(Stream input)
         {
-
+            try
+            {
+                _releaseSettings = Serialization.Read<ReleaseSettings>(input) ?? new ReleaseSettings();
+            }
+            catch
+            {
+                _releaseSettings = new ReleaseSettings();
+            }
         }
 
         public void SerializeSettings(Stream output)
         {
-            _releaseSettings.SaveSettings();
-
+            Serialization.Write(output, _releaseSettings);
         }
 
         public void Setup(IList<IExporter> exporters, IIndexField[] indexFields,

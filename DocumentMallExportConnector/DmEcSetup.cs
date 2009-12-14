@@ -87,7 +87,7 @@ namespace DocumentMallExportConnector
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            _settings.ReloadSettings();
+            //_settings.ReloadSettings();
             Close();
         }
 
