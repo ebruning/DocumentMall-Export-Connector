@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
 using Kofax.Eclipse.Base;
 using Kofax.VRS.UI.Common.Tools;
 
@@ -19,6 +18,11 @@ namespace DocumentMallExportConnector
         private string _documentFolder = string.Empty;
         private string _batchName;
 
+        private string _strName = string.Empty;
+        ArrayList _indexArray = new ArrayList();
+        private string _docNumber = string.Empty;
+        private string _docRepositoryPath = string.Empty;
+        private string _docType = string.Empty;
         #region Export Connector definitions
         public string Description
         {
@@ -125,13 +129,7 @@ namespace DocumentMallExportConnector
 
             _xmlData.WriteDocumentFileDataMultiPage(Path.GetFileName(fileName));
         }
-
-        private string _strName = string.Empty;
-        ArrayList _indexArray = new ArrayList();
-        private string _docNumber = string.Empty;
-        private string _docRepositoryPath = string.Empty;
-        private string _docType = string.Empty;
-
+        
         public object StartDocument(IDocument doc)
         {
             string[] indexValues = new string[doc.IndexDataCount];
@@ -207,21 +205,6 @@ namespace DocumentMallExportConnector
 
             return fullyQulifiedFileName;
         }
-
-        //public Dictionary<string,string> GetIndexDictionary(IDocument doc)
-        //{
-        //    Dictionary<string,string> output = new Dictionary<string, string>();
-
-        //    foreach (KeyValuePair<string, string> index in _releaseSettings.IndexPairs)
-        //    {
-        //        for (int i = 0; i < doc.IndexDataCount; i++)
-        //        {
-        //            if (index.Value.Equals(doc.GetIndexDataLabel(i)))
-        //                output.Add(index.Key, doc.GetIndexDataValue(i));
-        //        }
-        //    }
-        //    return output;
-        //}
 
         private string ConvertRepositoryPath(IDocument doc)
         {
