@@ -23,6 +23,7 @@ namespace DocumentMallExportConnector
         private string _docNumber = string.Empty;
         private string _docRepositoryPath = string.Empty;
         private string _docType = string.Empty;
+        
         #region Export Connector definitions
         public string Description
         {
