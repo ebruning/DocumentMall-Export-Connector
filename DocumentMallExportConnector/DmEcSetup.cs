@@ -29,6 +29,9 @@ namespace DocumentMallExportConnector
             PopulateDocType(indexFields);
             UpdateFileNameSetupButton(indexFields);
             documentUserControl.DisplayDocumentType(false);
+
+            this.Text = "DocumentMall Setup - " +
+                        System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
         }
 
         private void LoadSettings()
