@@ -56,7 +56,6 @@ namespace DocumentMallExportConnector
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtAccount = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.documentUserControl = new KXP.Export.Controls.DocumentUserControl();
             this.pmFileName = new DevExpress.XtraBars.PopupMenu(this.components);
@@ -283,10 +282,6 @@ namespace DocumentMallExportConnector
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "Account";
             // 
-            // defaultLookAndFeel1
-            // 
-            this.defaultLookAndFeel1.LookAndFeel.SkinName = "Money Twins";
-            // 
             // groupControl2
             // 
             this.groupControl2.Controls.Add(this.documentUserControl);
@@ -295,14 +290,13 @@ namespace DocumentMallExportConnector
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(483, 106);
             this.groupControl2.TabIndex = 6;
-            this.groupControl2.Text = "File Type";
             // 
             // documentUserControl
             // 
             this.documentUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.documentUserControl.Location = new System.Drawing.Point(2, 22);
+            this.documentUserControl.Location = new System.Drawing.Point(2, 20);
             this.documentUserControl.Name = "documentUserControl";
-            this.documentUserControl.Size = new System.Drawing.Size(479, 82);
+            this.documentUserControl.Size = new System.Drawing.Size(479, 84);
             this.documentUserControl.TabIndex = 0;
             // 
             // pmFileName
@@ -364,7 +358,6 @@ namespace DocumentMallExportConnector
         private DevExpress.XtraEditors.SimpleButton btnBrowse;
         private DevExpress.XtraEditors.TextEdit txtDestination;
         private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private KXP.Export.Controls.DocumentUserControl documentUserControl;
         private DevExpress.XtraEditors.TextEdit txtSecurityKey;
