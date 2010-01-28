@@ -263,9 +263,10 @@ namespace DocumentMallExportConnector
             // 
             this.labelControl2.Location = new System.Drawing.Point(12, 71);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(22, 13);
+            this.labelControl2.Size = new System.Drawing.Size(32, 13);
             this.labelControl2.TabIndex = 2;
-            this.labelControl2.Text = "User";
+            this.labelControl2.Text = "Owner";
+            this.labelControl2.ToolTip = "Document owner";
             // 
             // txtAccount
             // 

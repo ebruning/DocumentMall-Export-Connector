@@ -19,7 +19,7 @@ namespace DocumentMallExportConnector
         public DmEcSetup(ref ReleaseSettings settings, IEnumerable<IExporter> exporters, IIndexField [] indexFields)
         {
             InitializeComponent();
-
+            Text = string.Format("DocumentMall Export Setup - {0}",System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
             _settings = settings;
 
             documentUserControl.InitializeControl(exporters, _settings.ReleaseMode, _settings.FileTypeId);
