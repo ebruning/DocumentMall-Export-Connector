@@ -36,17 +36,17 @@
     <Reference Include="DevExpress.Utils.v8.3, Version=8.3.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v8.3, Version=8.3.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v8.3, Version=8.3.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="EclipseTools, Version=2.0.44.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="EclipseTools, Version=2.0.59.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files\Kofax\Kofax Express\bin\EclipseTools.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\Kofax\Kofax Express\bin\EclipseTools.dll</HintPath>
     </Reference>
-    <Reference Include="Kofax.Eclipse.Base, Version=1.10.359.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Kofax.Eclipse.Base, Version=2.0.44.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files\Kofax\Kofax Express\bin\Kofax.Eclipse.Base.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files\Kofax\Kofax Express\bin\Kofax.Eclipse.Base.dll</HintPath>
     </Reference>
     <Reference Include="Kofax.VRS.UI.Common.Tools, Version=2.0.44.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files\Kofax\Kofax Express\bin\Kofax.VRS.UI.Common.Tools.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files\Kofax\Kofax Express\bin\Kofax.VRS.UI.Common.Tools.dll</HintPath>
     </Reference>
     <Reference Include="KXP.Export.Controls, Version=1.0.95.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -105,7 +105,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" BuildVersion_ConfigurationName="Debug" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" />
+      <UserProperties BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_ConfigurationName="Debug" BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
