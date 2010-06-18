@@ -120,8 +120,7 @@ namespace DocumentMallExportConnector
 
         public void WriteDocumentDataIndexFileSinglePage(string docName, string securityKey, string path, string docType, ArrayList indexArray, string fileName)
         {
-            if (string.IsNullOrEmpty(docName) || string.IsNullOrEmpty(securityKey) || string.IsNullOrEmpty(path))
-                throw new Exception("Document data is blank");
+            ValidationDocumentFields(docName, securityKey, path);
 
             XmlElement root = _xmldocument.DocumentElement;
             XmlNode bodyNode = root.SelectSingleNode("//*/body");
@@ -190,6 +189,18 @@ namespace DocumentMallExportConnector
             childNode.InnerText = value;
 
             root.AppendChild(childNode);
+        }
+
+        private void ValidationDocumentFields(string docName, string securityKey, string path)
+        {
+            if (string.IsNullOrEmpty(docName))
+                throw new Exception("DocumentName is empty");
+            
+            if (string.IsNullOrEmpty(securityKey))
+                throw new Exception("SecurityKey is empty");
+            
+            if (string.IsNullOrEmpty(path))
+                throw new Exception("Path is empty");
         }
     }
  }
