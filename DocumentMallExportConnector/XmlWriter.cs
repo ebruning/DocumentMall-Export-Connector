@@ -18,7 +18,7 @@ namespace DocumentMallExportConnector
         public XmlWriter(string destination, string batchId)
         {
             _batchName = batchId;
-            _xmlFileName = Path.Combine(destination, "Batch.xml");
+            _xmlFileName = Path.Combine(destination, "Batch.tmp");
 
             _xmlWriter = new XmlTextWriter(_xmlFileName, Encoding.UTF8);
             _xmlWriter.Formatting = Formatting.Indented;
@@ -180,6 +180,8 @@ namespace DocumentMallExportConnector
         {
             _xmldocument.Save(_xmlFileName);
             _xmlWriter.Close();
+
+            File.Move(_xmlFileName, Path.ChangeExtension(_xmlFileName, "xml"));
         }
 
         private void WriteChildNode(XmlElement root, string element, string value)
