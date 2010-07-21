@@ -10,7 +10,7 @@ namespace DocumentMallExportConnector
     public class XmlWriter
     {
         private readonly string _batchName;
-        private string _xmlFileName = "";
+        private string _xmlFileName = string.Empty;
 
         private XmlTextWriter _xmlWriter;
         private XmlDocument _xmldocument = new XmlDocument();
