@@ -127,7 +127,7 @@ namespace DocumentMallExportConnector
             for (int i = 0; i < doc.IndexDataCount; i++)
                 indexValues[i] = doc.GetIndexDataValue(i);
 
-            string strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, indexValues) + "." + _docConverter.DefaultExtension;
+            string strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, null, indexValues) + "." + _docConverter.DefaultExtension;
             string fileName = Utilities.UniqueFileName(Path.Combine(_batchFolder, strName));
 
             _docConverter.Convert(doc, fileName);
@@ -148,7 +148,7 @@ namespace DocumentMallExportConnector
                 Directory.CreateDirectory(_batchFolder);
 
             //string fullyQulifiedFileName = GetPathFile(doc);
-            _strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, indexValues);
+            _strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, null, indexValues);
             _docNumber = doc.Number.ToString();
             _docRepositoryPath = ConvertRepositoryPath(doc);
             _docType = GetDocumentType(doc);
@@ -219,7 +219,7 @@ namespace DocumentMallExportConnector
             for (int i = 0; i < doc.IndexDataCount; i++)
                 indexValues[i] = doc.GetIndexDataValue(i);
 
-            return DefaultName.CalculateDefaultName(_releaseSettings.RepositoryPath, _batchName, doc.Number, indexValues);
+            return DefaultName.CalculateDefaultName(_releaseSettings.RepositoryPath, _batchName, doc.Number, null, indexValues);
         }
 
         private string GetDocumentType(IDocument doc)
