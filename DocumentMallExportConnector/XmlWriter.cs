@@ -145,9 +145,6 @@ namespace DocumentMallExportConnector
             WriteChildNode(docTypeNode, "tname", docType);
             documentNode.AppendChild(docTypeNode);
 
-            //XmlElement root = _xmldocument.DocumentElement;
-            //XmlNode indexNode = root.SelectSingleNode("//*/document[name='" + docName + "']/doctype");
-
             XmlElement indexElement = _xmldocument.CreateElement("index");
 
             foreach (string list in indexArray)
@@ -158,19 +155,14 @@ namespace DocumentMallExportConnector
                 WriteChildNode(indexElement, "ivalue", data[1]);
             }
 
-            //indexNode.AppendChild(indexElement);
             documentNode.AppendChild(indexElement);
 
-            //XmlElement root = _xmldocument.DocumentElement;
-            //XmlNode documentNode = root.SelectSingleNode("//*/document[name='" + document + "']");
             XmlElement contentNode = _xmldocument.CreateElement("content");
 
             documentNode.AppendChild(contentNode);
 
             XmlElement fileNode = _xmldocument.CreateElement("file");
 
-            //WriteChildNode(fileNode, "fname", Path.GetFileName(fileName));
-            //WriteChildNode(fileNode, "format", Path.GetExtension(fileName).TrimStart('.')); 
             WriteChildNode(fileNode, "fname", Path.GetFileName(fileName));
             WriteChildNode(fileNode, "format", GetFileExtension(Path.GetExtension(fileName).TrimStart('.')));
             contentNode.AppendChild(fileNode);

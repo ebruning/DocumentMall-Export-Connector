@@ -142,11 +142,9 @@ namespace DocumentMallExportConnector
             for (int i = 0; i < doc.IndexDataCount; i++)
                 indexValues[i] = doc.GetIndexDataValue(i);
 
-            //_documentFolder = Path.Combine(_batchFolder, doc.Number.ToString());
             if (!Directory.Exists(_batchFolder))
                 Directory.CreateDirectory(_batchFolder);
 
-            //string fullyQulifiedFileName = GetPathFile(doc);
             _strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, null, indexValues);
             _docNumber = doc.Number.ToString();
             _docRepositoryPath = ConvertRepositoryPath(doc);
@@ -155,22 +153,15 @@ namespace DocumentMallExportConnector
             _indexArray.Clear();
 
             for (int i = 0; i < doc.IndexDataCount; i++)
-            {
                 _indexArray.Add(string.Format("{0},{1}", doc.GetIndexDataLabel(i), doc.GetIndexDataValue(i)));
-            }
 
             return null;
         }
 
         public void Release(IPage page)
         {
-
-            //string _singlePageName = Utilities.UniqueFileName(Path.Combine(_batchFolder, strName));
             string _singlePageName = Utilities.UniqueFileName(Path.Combine(_batchFolder, _strName) + "-" + page.Number + "." + _pageConverter.DefaultExtension);
             _pageConverter.Convert(page, _singlePageName);
-
-            //_xmlData.WriteDocumentFileDataMultiPage(_singlePageName);
-            //_xmlData.WriteDocumentFileDataSinglePage(_docNumber, _singlePageName);
 
             _xmlData.WriteDocumentDataIndexFileSinglePage(_docNumber, _releaseSettings.SecurityKey, _docRepositoryPath, _docType, _indexArray, _singlePageName);
         }
@@ -198,9 +189,7 @@ namespace DocumentMallExportConnector
             for (int indexCount = 0; indexCount < doc.IndexDataCount; indexCount++)
             {
                 if (doc.GetIndexDataValue(indexCount) != GetCustomType(doc, _releaseSettings.DocumentType))
-                {
                     _xmlData.WriteDocumentIndexData(doc.GetIndexDataLabel(indexCount), doc.GetIndexDataValue(indexCount), fullyQulifiedFileName);
-                }
             }
         }
 

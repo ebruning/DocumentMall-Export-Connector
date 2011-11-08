@@ -23,7 +23,6 @@ namespace DocumentMallExportConnector
             _settings = settings;
 
             documentUserControl.InitializeControl(exporters, _settings.ReleaseMode, _settings.FileTypeId);
-            //documentUserControl.HideSingleMultiPage(DocumentUserControl.PageType.Single);
 
             LoadSettings();
             PopulateDropDown(indexFields, drbDocumentType, pmDocType, bmDocType, "Custom Document Type");
@@ -92,7 +91,6 @@ namespace DocumentMallExportConnector
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            //_settings.ReloadSettings();
             Close();
         }
 
