@@ -26,9 +26,12 @@ namespace DocumentMallExportConnector
             //documentUserControl.HideSingleMultiPage(DocumentUserControl.PageType.Single);
 
             LoadSettings();
-            PopulateDocType(indexFields);
+            PopulateDropDown(indexFields, drbDocumentType, pmDocType, bmDocType, "Custom Document Type");
+            PopulateDropDown(indexFields, cboSecurityKey, pmSecurityKey, bmSecurityKey, "Custom Security Key"); 
             UpdateFileNameSetupButton(indexFields);
-            documentUserControl.DisplayDocumentType(false);
+            // Commenting out the DisplayDocumentType() call
+            // Its not in the control and I don't rememeber what it does
+            // documentUserControl.DisplayDocumentType(false);
         }
 
         private void LoadSettings()
@@ -40,30 +43,31 @@ namespace DocumentMallExportConnector
             txtRepositoryPath.Text = _settings.RepositoryPath;
             txtDocumentFileName.Text = _settings.DocumentName;
 
-            SetDocumentType();
+            SetDropDown(drbDocumentType, txtDocType, _settings.CustomDocType, _settings.DocumentType);
+            SetDropDown(cboSecurityKey, txtSecurityKey, _settings.CustomSecurityKey, _settings.SecurityKey);
         }
 
-        private void PopulateDocType(IIndexField [] indexFields)
+        private void PopulateDropDown(IIndexField[] indexFields, DropDownButton button, PopupMenu popupMenu, BarManager barManager, string text)
         {
-            pmDocType.ClearLinks();
+            popupMenu.ClearLinks();
 
-            pmDocType.AddItem(bmDocType.Items.CreateButton("Custom Document Type"));
+            popupMenu.AddItem(barManager.Items.CreateButton(text));
 
             foreach (IIndexField field in indexFields)
-            {
-                pmDocType.AddItem(bmDocType.Items.CreateButton(field.Label));
-            }
+                popupMenu.AddItem(barManager.Items.CreateButton(field.Label));
 
-            SetClickEvent();
-            drbDocumentType.DropDownControl = pmDocType;
+            SetClickEvent(barManager);
+            button.DropDownControl = popupMenu;
         }
 
-        private void SetClickEvent()
+        private void SetClickEvent(BarManager barManager)
         {
-            for (int buttonIndex = 0; buttonIndex < bmDocType.Items.Count; buttonIndex++)
-            {
-                bmDocType.Items[buttonIndex].ItemClick += docTypeDropDown_ItemClick;
-            }
+            if (barManager.Equals(bmDocType))
+                for (int buttonIndex = 0; buttonIndex < barManager.Items.Count; buttonIndex++)
+                    barManager.Items[buttonIndex].ItemClick += docTypeDropDown_ItemClick;
+            else
+                for (int buttonIndex = 0; buttonIndex < barManager.Items.Count; buttonIndex++)
+                    barManager.Items[buttonIndex].ItemClick += securityKeyDropDown_ItemClick;
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -81,6 +85,7 @@ namespace DocumentMallExportConnector
                 _settings.SecurityKey = txtSecurityKey.Text;
                 _settings.DocumentType = txtDocType.Enabled ? txtDocType.Text : drbDocumentType.Text;
                 _settings.DocumentName = txtDocumentFileName.Text;
+                _settings.SecurityKey = txtSecurityKey.Enabled ? txtSecurityKey.Text : cboSecurityKey.Text;
                 Close();
             }
         }
@@ -100,6 +105,7 @@ namespace DocumentMallExportConnector
                 txtDestination.Text = dialog.SelectedPath;
         }
 
+        // TODO: Combine docTypeDropDown_ItemClick and securityKeyDropDown_ItemClick into a single method
         private void docTypeDropDown_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.Item.Caption.Equals("Custom Document Type"))
@@ -113,6 +119,23 @@ namespace DocumentMallExportConnector
                 _settings.CustomDocType = false;
                 txtDocType.Enabled = false;
                 drbDocumentType.Text = e.Item.Caption;
+            }
+        }
+
+        // TODO: Combine docTypeDropDown_ItemClick and securityKeyDropDown_ItemClick into a single method
+        private void securityKeyDropDown_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.Item.Caption.Equals("Custom Security Key"))
+            {
+                _settings.CustomSecurityKey = true;
+                txtSecurityKey.Enabled = true;
+                cboSecurityKey.Text = "Custom Security Key";
+            }
+            else
+            {
+                _settings.CustomSecurityKey = false;
+                txtSecurityKey.Enabled = false;
+                cboSecurityKey.Text = e.Item.Caption;
             }
         }
 
@@ -217,20 +240,26 @@ namespace DocumentMallExportConnector
             _setupFolderButton = true;
         }
 
-        private void SetDocumentType()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="button">DropDownButton to set</param>
+        /// <param name="textEdit">TextEdit box to set</param>
+        /// <param name="isCustom">Using a custom value or using an index</param>
+        /// <param name="value">Custom value _settings.DocumentType or _settings.SecurityKey</param>
+        private void SetDropDown(DropDownButton button, TextEdit textEdit, bool isCustom, string value)
         {
-            if (_settings.CustomDocType)
+            if (isCustom)
             {
-                drbDocumentType.Text = "Custom Document Type";
-                txtDocType.Text = _settings.DocumentType;
-                txtDocType.Enabled = true;
+                button.Text = button.Equals(drbDocumentType) ? "Custom Document Type" : "Custom Security Key";
+                textEdit.Text = value;
+                textEdit.Enabled = true;
             }
             else
             {
-                drbDocumentType.Text = _settings.DocumentType;
-                txtDocType.Enabled = false;
+                button.Text = value;
+                textEdit.Enabled = false;
             }
-
         }
 
         private void txtRepositoryPath_EditValueChanged(object sender, EventArgs e)

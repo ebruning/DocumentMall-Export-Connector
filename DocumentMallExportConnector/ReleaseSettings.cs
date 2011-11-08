@@ -78,6 +78,13 @@ namespace DocumentMallExportConnector
             set { m_CustomDocType = value; }
         }
 
+        private bool m_CustomSecurityKey;
+        public bool CustomSecurityKey
+        {
+            get { return m_CustomSecurityKey; }
+            set { m_CustomSecurityKey = value; }
+        }
+
         public static bool CheckGuid(string guidString)
         {
             try

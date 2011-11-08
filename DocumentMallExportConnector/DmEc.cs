@@ -74,7 +74,6 @@ namespace DocumentMallExportConnector
         {
             DmEcSetup setup = new DmEcSetup(ref _releaseSettings, exporters, indexFields);
             setup.ShowDialog();
-
         }
         #endregion
 
@@ -151,7 +150,7 @@ namespace DocumentMallExportConnector
             _strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, null, indexValues);
             _docNumber = doc.Number.ToString();
             _docRepositoryPath = ConvertRepositoryPath(doc);
-            _docType = GetDocumentType(doc);
+            _docType = GetCustomType(doc, _releaseSettings.DocumentType);
 
             _indexArray.Clear();
 
@@ -191,11 +190,14 @@ namespace DocumentMallExportConnector
 
         public void SetDocumentDataMultiPage(IDocument doc, string fullyQulifiedFileName)
         {
-            _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), _releaseSettings.SecurityKey, ConvertRepositoryPath(doc), GetDocumentType(doc));
+            _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), 
+                                       GetCustomType(doc, _releaseSettings.DocumentType), 
+                                       ConvertRepositoryPath(doc), 
+                                       GetCustomType(doc, _releaseSettings.DocumentType));
 
             for (int indexCount = 0; indexCount < doc.IndexDataCount; indexCount++)
             {
-                if (doc.GetIndexDataValue(indexCount) != GetDocumentType(doc))
+                if (doc.GetIndexDataValue(indexCount) != GetCustomType(doc, _releaseSettings.DocumentType))
                 {
                     _xmlData.WriteDocumentIndexData(doc.GetIndexDataLabel(indexCount), doc.GetIndexDataValue(indexCount), fullyQulifiedFileName);
                 }
@@ -222,9 +224,9 @@ namespace DocumentMallExportConnector
             return DefaultName.CalculateDefaultName(_releaseSettings.RepositoryPath, _batchName, doc.Number, null, indexValues);
         }
 
-        private string GetDocumentType(IDocument doc)
+        private string GetCustomType(IDocument doc, string value)
         {
-            return doc.GetIndexDataValue(_releaseSettings.DocumentType) ?? _releaseSettings.DocumentType;
+            return doc.GetIndexDataValue(value) ?? _releaseSettings.DocumentType;
         }
     }
 }
