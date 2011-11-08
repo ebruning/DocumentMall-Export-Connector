@@ -99,7 +99,7 @@ namespace DocumentMallExportConnector
             XmlElement fileNode = _xmldocument.CreateElement("file");
             
             WriteChildNode(fileNode, "fname", Path.GetFileName(fileName));
-            WriteChildNode(fileNode, "format", Path.GetExtension(fileName).TrimStart('.'));
+            WriteChildNode(fileNode, "format", GetFileExtension(Path.GetExtension(fileName).TrimStart('.')));
             contentNode.AppendChild(fileNode);
         }
 
@@ -172,7 +172,7 @@ namespace DocumentMallExportConnector
             //WriteChildNode(fileNode, "fname", Path.GetFileName(fileName));
             //WriteChildNode(fileNode, "format", Path.GetExtension(fileName).TrimStart('.')); 
             WriteChildNode(fileNode, "fname", Path.GetFileName(fileName));
-            WriteChildNode(fileNode, "format", Path.GetExtension(fileName).TrimStart('.'));
+            WriteChildNode(fileNode, "format", GetFileExtension(Path.GetExtension(fileName).TrimStart('.')));
             contentNode.AppendChild(fileNode);
         }
 
