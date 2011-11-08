@@ -22,11 +22,11 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UpdateFileVersion = True
-		BuildVersion_UpdateAssemblyVersion = True
-		VisualSVNWorkingCopyRoot = .
+		BuildVersion_BuildVersioningStyle = None.None.TimeStamp.None
+		BuildVersion_ConfigurationName = Any
 		BuildVersion_AssemblyInfoFilename = DocumentMallExportConnector\Properties\AssemblyInfo.cs
-		BuildVersion_ConfigurationName = Debug
-		BuildVersion_BuildVersioningStyle = None.None.Increment.None
+		VisualSVNWorkingCopyRoot = .
+		BuildVersion_UpdateAssemblyVersion = True
+		BuildVersion_UpdateFileVersion = True
 	EndGlobalSection
 EndGlobal
