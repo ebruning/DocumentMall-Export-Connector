@@ -114,7 +114,7 @@ namespace DocumentMallExportConnector
             XmlElement fileNode = _xmldocument.CreateElement("file");
 
             WriteChildNode(fileNode, "fname", Path.GetFileName(fileName));
-            WriteChildNode(fileNode, "format", Path.GetExtension(fileName).TrimStart('.'));
+            WriteChildNode(fileNode, "format", GetFileExtension(Path.GetExtension(fileName).TrimStart('.')));
             contentNode.AppendChild(fileNode);
         }
 
@@ -203,6 +203,20 @@ namespace DocumentMallExportConnector
             
             if (string.IsNullOrEmpty(path))
                 throw new Exception("Path is empty");
+        }
+
+        /// <summary>
+        /// Converts tif to tiff for the format element in the xml
+        /// </summary>
+        /// <param name="extension">Image file extension</param>
+        /// <returns>TIFF if the image is TIF. Otherwise returns the default extension</returns>
+ 
+        private string GetFileExtension(string extension)
+        {
+            if (extension.ToLower().Equals("tif"))
+                return "tiff";
+            else
+                return extension;
         }
     }
  }
