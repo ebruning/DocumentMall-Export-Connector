@@ -28,7 +28,9 @@ namespace DocumentMallExportConnector
             LoadSettings();
             PopulateDocType(indexFields);
             UpdateFileNameSetupButton(indexFields);
-            documentUserControl.DisplayDocumentType(false);
+            // Commenting out the DisplayDocumentType() call
+            // Its not in the control and I don't rememeber what it does
+            // documentUserControl.DisplayDocumentType(false);
         }
 
         private void LoadSettings()
