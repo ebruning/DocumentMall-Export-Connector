@@ -210,13 +210,9 @@ namespace DocumentMallExportConnector
         /// </summary>
         /// <param name="extension">Image file extension</param>
         /// <returns>TIFF if the image is TIF. Otherwise returns the default extension</returns>
- 
         private string GetFileExtension(string extension)
         {
-            if (extension.ToLower().Equals("tif"))
-                return "tiff";
-            else
-                return extension;
+            return extension.ToLower().Equals("tif") ? "tiff" : extension;
         }
     }
  }
