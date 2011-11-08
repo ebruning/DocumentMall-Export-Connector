@@ -60,6 +60,7 @@ namespace DocumentMallExportConnector
             this.documentUserControl = new KXP.Export.Controls.DocumentUserControl();
             this.pmFileName = new DevExpress.XtraBars.PopupMenu(this.components);
             this.pmFolderPath = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.cboSecurityKey = new DevExpress.XtraEditors.DropDownButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDocumentFileName.Properties)).BeginInit();
@@ -99,6 +100,7 @@ namespace DocumentMallExportConnector
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.cboSecurityKey);
             this.groupControl1.Controls.Add(this.btnFolderSetup);
             this.groupControl1.Controls.Add(this.btnFileNameSetup);
             this.groupControl1.Controls.Add(this.txtDocumentFileName);
@@ -310,6 +312,13 @@ namespace DocumentMallExportConnector
             this.pmFolderPath.Manager = this.bmDocType;
             this.pmFolderPath.Name = "pmFolderPath";
             // 
+            // cboSecurityKey
+            // 
+            this.cboSecurityKey.Location = new System.Drawing.Point(255, 318);
+            this.cboSecurityKey.Name = "cboSecurityKey";
+            this.cboSecurityKey.Size = new System.Drawing.Size(135, 23);
+            this.cboSecurityKey.TabIndex = 18;
+            // 
             // DmEcSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -380,6 +389,7 @@ namespace DocumentMallExportConnector
         private DevExpress.XtraBars.PopupMenu pmFileName;
         private DevExpress.XtraEditors.SimpleButton btnFolderSetup;
         private DevExpress.XtraBars.PopupMenu pmFolderPath;
+        private DevExpress.XtraEditors.DropDownButton cboSecurityKey;
 
 
 

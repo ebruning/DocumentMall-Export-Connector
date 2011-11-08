@@ -50,12 +50,25 @@ namespace DocumentMallExportConnector
             pmDocType.AddItem(bmDocType.Items.CreateButton("Custom Document Type"));
 
             foreach (IIndexField field in indexFields)
-            {
                 pmDocType.AddItem(bmDocType.Items.CreateButton(field.Label));
-            }
 
             SetClickEvent();
             drbDocumentType.DropDownControl = pmDocType;
+        }
+
+        private void PopulateSecurityKey(IIndexField[] indexFields)
+        {
+            /*
+            cboSecurityKey.
+
+            pmDocType.AddItem(bmDocType.Items.CreateButton("Custom Security Key"));
+
+            foreach (IIndexField field in indexFields)
+                pmDocType.AddItem(bmDocType.Items.CreateButton(field.Label));
+
+            SetClickEvent();
+            drbDocumentType.DropDownControl = pmDocType;
+            */
         }
 
         private void SetClickEvent()
