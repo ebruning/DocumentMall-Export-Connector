@@ -32,6 +32,7 @@ namespace DocumentMallExportConnector
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnOk = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.cboSecurityKey = new DevExpress.XtraEditors.DropDownButton();
             this.btnFolderSetup = new DevExpress.XtraEditors.SimpleButton();
             this.btnFileNameSetup = new DevExpress.XtraEditors.SimpleButton();
             this.txtDocumentFileName = new DevExpress.XtraEditors.TextEdit();
@@ -60,7 +61,13 @@ namespace DocumentMallExportConnector
             this.documentUserControl = new KXP.Export.Controls.DocumentUserControl();
             this.pmFileName = new DevExpress.XtraBars.PopupMenu(this.components);
             this.pmFolderPath = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.cboSecurityKey = new DevExpress.XtraEditors.DropDownButton();
+            this.pmSecurityKey = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.bmSecurityKey = new DevExpress.XtraBars.BarManager(this.components);
+            this.bar3 = new DevExpress.XtraBars.Bar();
+            this.barDockControl1 = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControl2 = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControl3 = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControl4 = new DevExpress.XtraBars.BarDockControl();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDocumentFileName.Properties)).BeginInit();
@@ -76,6 +83,8 @@ namespace DocumentMallExportConnector
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pmFileName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pmFolderPath)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pmSecurityKey)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bmSecurityKey)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -94,7 +103,7 @@ namespace DocumentMallExportConnector
             this.btnOk.Location = new System.Drawing.Point(315, 477);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 4;
+            this.btnOk.TabIndex = 2;
             this.btnOk.Text = "Ok";
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
@@ -123,15 +132,22 @@ namespace DocumentMallExportConnector
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(483, 354);
-            this.groupControl1.TabIndex = 5;
+            this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "DocumentMall";
+            // 
+            // cboSecurityKey
+            // 
+            this.cboSecurityKey.Location = new System.Drawing.Point(12, 321);
+            this.cboSecurityKey.Name = "cboSecurityKey";
+            this.cboSecurityKey.Size = new System.Drawing.Size(236, 23);
+            this.cboSecurityKey.TabIndex = 13;
             // 
             // btnFolderSetup
             // 
             this.btnFolderSetup.Location = new System.Drawing.Point(396, 179);
             this.btnFolderSetup.Name = "btnFolderSetup";
             this.btnFolderSetup.Size = new System.Drawing.Size(75, 23);
-            this.btnFolderSetup.TabIndex = 17;
+            this.btnFolderSetup.TabIndex = 8;
             this.btnFolderSetup.Text = "Setup";
             this.btnFolderSetup.Click += new System.EventHandler(this.btnFolderSetup_Click);
             // 
@@ -140,7 +156,7 @@ namespace DocumentMallExportConnector
             this.btnFileNameSetup.Location = new System.Drawing.Point(396, 225);
             this.btnFileNameSetup.Name = "btnFileNameSetup";
             this.btnFileNameSetup.Size = new System.Drawing.Size(75, 23);
-            this.btnFileNameSetup.TabIndex = 16;
+            this.btnFileNameSetup.TabIndex = 10;
             this.btnFileNameSetup.Text = "Setup";
             this.btnFileNameSetup.Click += new System.EventHandler(this.btnFileNameSetup_Click);
             // 
@@ -150,7 +166,7 @@ namespace DocumentMallExportConnector
             this.txtDocumentFileName.MenuManager = this.bmDocType;
             this.txtDocumentFileName.Name = "txtDocumentFileName";
             this.txtDocumentFileName.Size = new System.Drawing.Size(378, 20);
-            this.txtDocumentFileName.TabIndex = 15;
+            this.txtDocumentFileName.TabIndex = 9;
             this.txtDocumentFileName.EditValueChanged += new System.EventHandler(this.txtDocumentFileName_EditValueChanged);
             // 
             // bmDocType
@@ -168,7 +184,7 @@ namespace DocumentMallExportConnector
             this.drbDocumentType.Name = "drbDocumentType";
             this.bmDocType.SetPopupContextMenu(this.drbDocumentType, this.pmDocType);
             this.drbDocumentType.Size = new System.Drawing.Size(236, 23);
-            this.drbDocumentType.TabIndex = 12;
+            this.drbDocumentType.TabIndex = 11;
             // 
             // pmDocType
             // 
@@ -187,8 +203,8 @@ namespace DocumentMallExportConnector
             // 
             this.txtDocType.Location = new System.Drawing.Point(254, 276);
             this.txtDocType.Name = "txtDocType";
-            this.txtDocType.Size = new System.Drawing.Size(136, 20);
-            this.txtDocType.TabIndex = 13;
+            this.txtDocType.Size = new System.Drawing.Size(217, 20);
+            this.txtDocType.TabIndex = 12;
             // 
             // labelControl6
             // 
@@ -203,7 +219,7 @@ namespace DocumentMallExportConnector
             this.txtRepositoryPath.Location = new System.Drawing.Point(12, 182);
             this.txtRepositoryPath.Name = "txtRepositoryPath";
             this.txtRepositoryPath.Size = new System.Drawing.Size(378, 20);
-            this.txtRepositoryPath.TabIndex = 10;
+            this.txtRepositoryPath.TabIndex = 7;
             this.txtRepositoryPath.ToolTip = "Free form text must be between quotes. ie \"/Invoices/Kofax\"";
             this.txtRepositoryPath.EditValueChanged += new System.EventHandler(this.txtRepositoryPath_EditValueChanged);
             // 
@@ -217,10 +233,10 @@ namespace DocumentMallExportConnector
             // 
             // txtSecurityKey
             // 
-            this.txtSecurityKey.Location = new System.Drawing.Point(12, 321);
+            this.txtSecurityKey.Location = new System.Drawing.Point(254, 324);
             this.txtSecurityKey.Name = "txtSecurityKey";
-            this.txtSecurityKey.Size = new System.Drawing.Size(236, 20);
-            this.txtSecurityKey.TabIndex = 8;
+            this.txtSecurityKey.Size = new System.Drawing.Size(217, 20);
+            this.txtSecurityKey.TabIndex = 14;
             // 
             // labelControl4
             // 
@@ -292,7 +308,7 @@ namespace DocumentMallExportConnector
             this.groupControl2.Location = new System.Drawing.Point(0, 354);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(483, 106);
-            this.groupControl2.TabIndex = 6;
+            this.groupControl2.TabIndex = 1;
             // 
             // documentUserControl
             // 
@@ -312,12 +328,34 @@ namespace DocumentMallExportConnector
             this.pmFolderPath.Manager = this.bmDocType;
             this.pmFolderPath.Name = "pmFolderPath";
             // 
-            // cboSecurityKey
+            // pmSecurityKey
             // 
-            this.cboSecurityKey.Location = new System.Drawing.Point(255, 318);
-            this.cboSecurityKey.Name = "cboSecurityKey";
-            this.cboSecurityKey.Size = new System.Drawing.Size(135, 23);
-            this.cboSecurityKey.TabIndex = 18;
+            this.pmSecurityKey.Manager = this.bmDocType;
+            this.pmSecurityKey.Name = "pmSecurityKey";
+            // 
+            // bmSecurityKey
+            // 
+            this.bmSecurityKey.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
+            this.bar3});
+            this.bmSecurityKey.DockControls.Add(this.barDockControl1);
+            this.bmSecurityKey.DockControls.Add(this.barDockControl2);
+            this.bmSecurityKey.DockControls.Add(this.barDockControl3);
+            this.bmSecurityKey.DockControls.Add(this.barDockControl4);
+            this.bmSecurityKey.Form = this;
+            this.bmSecurityKey.MaxItemId = 0;
+            this.bmSecurityKey.StatusBar = this.bar3;
+            // 
+            // bar3
+            // 
+            this.bar3.BarName = "Status bar";
+            this.bar3.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Bottom;
+            this.bar3.DockCol = 0;
+            this.bar3.DockRow = 0;
+            this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
+            this.bar3.OptionsBar.AllowQuickCustomization = false;
+            this.bar3.OptionsBar.DrawDragBorder = false;
+            this.bar3.OptionsBar.UseWholeRow = true;
+            this.bar3.Text = "Status bar";
             // 
             // DmEcSetup
             // 
@@ -332,6 +370,10 @@ namespace DocumentMallExportConnector
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Controls.Add(this.barDockControl3);
+            this.Controls.Add(this.barDockControl4);
+            this.Controls.Add(this.barDockControl2);
+            this.Controls.Add(this.barDockControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "DmEcSetup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -352,6 +394,8 @@ namespace DocumentMallExportConnector
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pmFileName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pmFolderPath)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pmSecurityKey)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bmSecurityKey)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -390,6 +434,13 @@ namespace DocumentMallExportConnector
         private DevExpress.XtraEditors.SimpleButton btnFolderSetup;
         private DevExpress.XtraBars.PopupMenu pmFolderPath;
         private DevExpress.XtraEditors.DropDownButton cboSecurityKey;
+        private DevExpress.XtraBars.PopupMenu pmSecurityKey;
+        private DevExpress.XtraBars.BarDockControl barDockControl3;
+        private DevExpress.XtraBars.BarDockControl barDockControl4;
+        private DevExpress.XtraBars.BarDockControl barDockControl2;
+        private DevExpress.XtraBars.BarDockControl barDockControl1;
+        private DevExpress.XtraBars.BarManager bmSecurityKey;
+        private DevExpress.XtraBars.Bar bar3;
 
 
 
