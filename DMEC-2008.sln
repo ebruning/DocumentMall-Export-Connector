@@ -26,7 +26,7 @@ Global
 		BuildVersion_UpdateAssemblyVersion = True
 		VisualSVNWorkingCopyRoot = .
 		BuildVersion_AssemblyInfoFilename = DocumentMallExportConnector\Properties\AssemblyInfo.cs
-		BuildVersion_ConfigurationName = Debug
-		BuildVersion_BuildVersioningStyle = None.None.Increment.None
+		BuildVersion_ConfigurationName = Any
+		BuildVersion_BuildVersioningStyle = None.None.TimeStamp.None
 	EndGlobalSection
 EndGlobal
