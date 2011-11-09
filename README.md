@@ -16,13 +16,12 @@ Configuration:
 6. **Document Type:** The type of document being exported. This can be a static field or can be populated from an index field. These types need to be defined in DocumentMall first. Populates the doctype tag.
 7. **Security Key:** The Permission Set Name (security key or ACL name) as defined in DocumentMall. This can be a static value or taken from an index field.
 
-
 ###Building
 The following software is required to build the solution
 
 - Visual Studio 2008 or 2010
-- Developer Express 8.3 
-- Kofax Express
+- [Developer Express 8.3](http://devexpress.com/Products/NET/Controls/WinForms/)
+- [Kofax Express](http://www.kofax.com/express)
 
 ###Copyright
 Copyright 2011 Kofax, Inc.
