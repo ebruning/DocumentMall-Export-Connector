@@ -5,7 +5,6 @@ The DocumentMall Export Connector will allow Kofax Express to export a batch wit
 
 ###Installation:
 The DocumentMall Export Connector requires Kofax Express and will run on any operating system that it supported by [Kofax Express](http://www.kofax.com/express/technical-specifications.asp).  To install, extract all files from the included zip file and execute setup.exe. 
-Configuration: 
 
 ###Usage 
 1. **Account:** This is the account name you are sending the documents to. This will populate the <docbase> tag.
@@ -15,6 +14,8 @@ Configuration:
 5. **Document file name:** The name of the image files.
 6. **Document Type:** The type of document being exported. This can be a static field or can be populated from an index field. These types need to be defined in DocumentMall first. Populates the doctype tag.
 7. **Security Key:** The Permission Set Name (security key or ACL name) as defined in DocumentMall. This can be a static value or taken from an index field.
+
+![Exporter](http://f.cl.ly/items/0F2G0J2r1q2X183Y2t29/DocumentMallSetup.png)
 
 ###Building
 The following software is required to build the solution
