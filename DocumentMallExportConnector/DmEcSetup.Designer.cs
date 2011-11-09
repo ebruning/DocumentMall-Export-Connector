@@ -63,7 +63,6 @@ namespace DocumentMallExportConnector
             this.pmFolderPath = new DevExpress.XtraBars.PopupMenu(this.components);
             this.pmSecurityKey = new DevExpress.XtraBars.PopupMenu(this.components);
             this.bmSecurityKey = new DevExpress.XtraBars.BarManager(this.components);
-            this.bar3 = new DevExpress.XtraBars.Bar();
             this.barDockControl1 = new DevExpress.XtraBars.BarDockControl();
             this.barDockControl2 = new DevExpress.XtraBars.BarDockControl();
             this.barDockControl3 = new DevExpress.XtraBars.BarDockControl();
@@ -335,27 +334,12 @@ namespace DocumentMallExportConnector
             // 
             // bmSecurityKey
             // 
-            this.bmSecurityKey.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
-            this.bar3});
             this.bmSecurityKey.DockControls.Add(this.barDockControl1);
             this.bmSecurityKey.DockControls.Add(this.barDockControl2);
             this.bmSecurityKey.DockControls.Add(this.barDockControl3);
             this.bmSecurityKey.DockControls.Add(this.barDockControl4);
             this.bmSecurityKey.Form = this;
             this.bmSecurityKey.MaxItemId = 0;
-            this.bmSecurityKey.StatusBar = this.bar3;
-            // 
-            // bar3
-            // 
-            this.bar3.BarName = "Status bar";
-            this.bar3.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Bottom;
-            this.bar3.DockCol = 0;
-            this.bar3.DockRow = 0;
-            this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
-            this.bar3.OptionsBar.AllowQuickCustomization = false;
-            this.bar3.OptionsBar.DrawDragBorder = false;
-            this.bar3.OptionsBar.UseWholeRow = true;
-            this.bar3.Text = "Status bar";
             // 
             // DmEcSetup
             // 
@@ -440,7 +424,6 @@ namespace DocumentMallExportConnector
         private DevExpress.XtraBars.BarDockControl barDockControl2;
         private DevExpress.XtraBars.BarDockControl barDockControl1;
         private DevExpress.XtraBars.BarManager bmSecurityKey;
-        private DevExpress.XtraBars.Bar bar3;
 
 
 
