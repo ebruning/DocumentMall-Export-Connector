@@ -8,13 +8,21 @@ The DocumentMall Export Connector requires Kofax Express and will run on any ope
 Configuration: 
 
 ###Usage 
-1. Account: This is the account name you are sending the documents to. This will populate the <docbase> tag.
-2. Owner: This is the user sending the documents. This populates the user tag.
-3. DocumentMall watch folder: The local folder where the Upload agent scans for new batches.
-4. DocumentMall folder path: This is the path where the documents will be released in DocumentMall. This is a UNIX style folder.
-5. Document file name: The name of the image files.
-6. Document Type: The type of document being exported. This can be a static field or can be populated from an index field. These types need to be defined in DocumentMall first. Populates the doctype tag.
-7. Security Key: The Permission Set Name (security key or ACL name) as defined in DocumentMall. This can be a static value or taken from an index field.
+1. **Account:** This is the account name you are sending the documents to. This will populate the <docbase> tag.
+2. **Owner:** This is the user sending the documents. This populates the user tag.
+3. **DocumentMall watch folder:** The local folder where the Upload agent scans for new batches.
+4. **DocumentMall folder path:** This is the path where the documents will be released in DocumentMall. This is a UNIX style folder.
+5. **Document file name:** The name of the image files.
+6. **Document Type:** The type of document being exported. This can be a static field or can be populated from an index field. These types need to be defined in DocumentMall first. Populates the doctype tag.
+7. **Security Key:** The Permission Set Name (security key or ACL name) as defined in DocumentMall. This can be a static value or taken from an index field.
+
+
+###Building
+The following software is required to build the solution
+
+- Visual Studio 2008 or 2010
+- Developer Express 8.3 
+- Kofax Express
 
 ###Copyright
 Copyright 2011 Kofax, Inc.
