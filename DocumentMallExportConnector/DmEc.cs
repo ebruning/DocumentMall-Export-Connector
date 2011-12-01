@@ -182,7 +182,7 @@ namespace DocumentMallExportConnector
         public void SetDocumentDataMultiPage(IDocument doc, string fullyQulifiedFileName)
         {
             _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), 
-                                       GetCustomType(doc, _releaseSettings.DocumentType), 
+                                       GetCustomType(doc, _releaseSettings.SecurityKey), 
                                        ConvertRepositoryPath(doc), 
                                        GetCustomType(doc, _releaseSettings.DocumentType));
 
