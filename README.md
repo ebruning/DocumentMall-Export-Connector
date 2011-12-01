@@ -1,12 +1,15 @@
-##DocumentMall Export Connector
+DocumentMall Export Connector
+=============================
 
-###Overview:
+Overview
+--------
 The DocumentMall Export Connector will allow Kofax Express to export a batch with an XML file that can be read by the Upload Agent to import batches into DocumentMall.
 
-###Installation:
+Installation
+------------
 The DocumentMall Export Connector requires Kofax Express and will run on any operating system that it supported by [Kofax Express](http://www.kofax.com/express/technical-specifications.asp).  To install, extract all files from the included zip file and execute setup.exe. 
 
-###Usage 
+### Usage 
 1. **Account:** This is the account name you are sending the documents to. This will populate the <docbase> tag.
 2. **Owner:** This is the user sending the documents. This populates the user tag.
 3. **DocumentMall watch folder:** The local folder where the Upload agent scans for new batches.
@@ -17,14 +20,16 @@ The DocumentMall Export Connector requires Kofax Express and will run on any ope
 
 ![Exporter](http://f.cl.ly/items/0F2G0J2r1q2X183Y2t29/DocumentMallSetup.png)
 
-###Building
+Building
+--------
 The following software is required to build the solution
 
 - Visual Studio 2008 or 2010
 - [Developer Express 8.3](http://devexpress.com/Products/NET/Controls/WinForms/)
 - [Kofax Express](http://www.kofax.com/express)
 
-###Copyright
+Copyright
+---------
 Copyright 2011 Kofax, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
