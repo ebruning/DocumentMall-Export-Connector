@@ -22,7 +22,7 @@
         "Entry"
         {
         "MsmKey" = "8:_0EFA6012B1E0941D0B6B9EF044848340"
-        "OwnerKey" = "8:_50E1154C8ACB9C5EA53904D93F82AC44"
+        "OwnerKey" = "8:_B6D50151B573234D72608DD569CD0D4D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -45,12 +45,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_50E1154C8ACB9C5EA53904D93F82AC44"
-        "OwnerKey" = "8:_5BDBFBF20F6E43BBAD8BFD3CDB2B8F3A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5BDBFBF20F6E43BBAD8BFD3CDB2B8F3A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -64,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_73518AC1B74A4025CDA03CDA3D3F95E8"
-        "OwnerKey" = "8:_50E1154C8ACB9C5EA53904D93F82AC44"
+        "OwnerKey" = "8:_B6D50151B573234D72608DD569CD0D4D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,7 +100,7 @@
         "Entry"
         {
         "MsmKey" = "8:_8A64E3F6117A550A57CBC7CF341D28E2"
-        "OwnerKey" = "8:_50E1154C8ACB9C5EA53904D93F82AC44"
+        "OwnerKey" = "8:_B6D50151B573234D72608DD569CD0D4D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -124,6 +118,12 @@
         "Entry"
         {
         "MsmKey" = "8:_A80986DD97595E3AB9641DC55ED33B76"
+        "OwnerKey" = "8:_5BDBFBF20F6E43BBAD8BFD3CDB2B8F3A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B6D50151B573234D72608DD569CD0D4D"
         "OwnerKey" = "8:_5BDBFBF20F6E43BBAD8BFD3CDB2B8F3A"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -165,12 +165,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F242BD5944ED9AA4E965CCAFFFB3CE61"
-        "OwnerKey" = "8:_5BDBFBF20F6E43BBAD8BFD3CDB2B8F3A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_5BDBFBF20F6E43BBAD8BFD3CDB2B8F3A"
         "MsmSig" = "8:_UNDEFINED"
@@ -178,13 +172,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_50E1154C8ACB9C5EA53904D93F82AC44"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F242BD5944ED9AA4E965CCAFFFB3CE61"
+        "OwnerKey" = "8:_B6D50151B573234D72608DD569CD0D4D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -439,37 +427,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_50E1154C8ACB9C5EA53904D93F82AC44"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:KXP.Export.Controls, Version=1.0.99.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_50E1154C8ACB9C5EA53904D93F82AC44"
-                    {
-                    "Name" = "8:KXP.Export.Controls.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:KXP.Export.Controls.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_7206B12B7BCA4CE7897E52B6B3555D9F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_73518AC1B74A4025CDA03CDA3D3F95E8"
             {
             "AssemblyRegister" = "3:1"
@@ -594,6 +551,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B6D50151B573234D72608DD569CD0D4D"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:KXP.Export.Controls, Version=1.0.99.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_B6D50151B573234D72608DD569CD0D4D"
+                    {
+                    "Name" = "8:KXP.Export.Controls.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:KXP.Export.Controls.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_7206B12B7BCA4CE7897E52B6B3555D9F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BDAFC0ABA9B4078353A41EC9F2831352"
             {
             "AssemblyRegister" = "3:1"
@@ -653,37 +641,6 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F242BD5944ED9AA4E965CCAFFFB3CE61"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_F242BD5944ED9AA4E965CCAFFFB3CE61"
-                    {
-                    "Name" = "8:NLog.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:NLog.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_989FE25D298B4F86B948641EC4650BE7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -767,14 +724,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DocumentMall Export Connector Setup"
-        "ProductCode" = "8:{CF2849A3-C767-4134-9640-A11B93D17FB2}"
-        "PackageCode" = "8:{30D98F99-9ABA-4E5A-A30D-B8EFECC5EE41}"
+        "ProductCode" = "8:{44458E7C-00E8-44B8-A71A-C0DBF61C1756}"
+        "PackageCode" = "8:{AA85E8CC-43BD-4FAD-8679-CEAC861DEAEA}"
         "UpgradeCode" = "8:{8F6A3F9E-3A2A-4723-9668-1B402671B887}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:3.0.1"
+        "ProductVersion" = "8:3.0.2"
         "Manufacturer" = "8:Kofax Inc"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
