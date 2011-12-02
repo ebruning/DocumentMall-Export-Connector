@@ -148,7 +148,7 @@ namespace DocumentMallExportConnector
             _strName = DefaultName.CalculateDefaultName(_releaseSettings.DocumentName, _batchName, doc.Number, null, indexValues);
             _docNumber = doc.Number.ToString();
             _docRepositoryPath = ConvertRepositoryPath(doc);
-            _docType = GetCustomType(doc, _releaseSettings.DocumentType);
+            _docType = GetCustomType(doc, _releaseSettings.DocumentType, false);
 
             _indexArray.Clear();
 
@@ -182,13 +182,13 @@ namespace DocumentMallExportConnector
         public void SetDocumentDataMultiPage(IDocument doc, string fullyQulifiedFileName)
         {
             _xmlData.WriteDocumentData(Path.GetFileName(fullyQulifiedFileName), 
-                                       GetCustomType(doc, _releaseSettings.SecurityKey), 
+                                       GetCustomType(doc, _releaseSettings.SecurityKey, true), 
                                        ConvertRepositoryPath(doc), 
-                                       GetCustomType(doc, _releaseSettings.DocumentType));
+                                       GetCustomType(doc, _releaseSettings.DocumentType, false));
 
             for (int indexCount = 0; indexCount < doc.IndexDataCount; indexCount++)
             {
-                if (doc.GetIndexDataValue(indexCount) != GetCustomType(doc, _releaseSettings.DocumentType))
+                if (doc.GetIndexDataValue(indexCount) != GetCustomType(doc, _releaseSettings.DocumentType, false))
                     _xmlData.WriteDocumentIndexData(doc.GetIndexDataLabel(indexCount), doc.GetIndexDataValue(indexCount), fullyQulifiedFileName);
             }
         }
@@ -213,8 +213,18 @@ namespace DocumentMallExportConnector
             return DefaultName.CalculateDefaultName(_releaseSettings.RepositoryPath, _batchName, doc.Number, null, indexValues);
         }
 
-        private string GetCustomType(IDocument doc, string value)
+        /// <summary>
+        /// Get the value for the Document Type or Security Type
+        /// </summary>
+        /// <param name="doc">Current IDocument</param>
+        /// <param name="value">The index name used to get the value</param>
+        /// <param name="isSecKey">Is the value the security key</param>
+        /// <returns>Return the index value or the custom value</returns>
+        private string GetCustomType(IDocument doc, string value, bool isSecKey)
         {
+            if (isSecKey)
+                return doc.GetIndexDataValue(value) ?? _releaseSettings.SecurityKey;
+
             return doc.GetIndexDataValue(value) ?? _releaseSettings.DocumentType;
         }
     }

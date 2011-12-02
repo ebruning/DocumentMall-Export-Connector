@@ -185,6 +185,12 @@ namespace DocumentMallExportConnector
             root.AppendChild(childNode);
         }
 
+        /// <summary>
+        /// Validate the Document Name, Security Key and document respository and make sure they aren't empty
+        /// </summary>
+        /// <param name="docName">Name of the document</param>
+        /// <param name="securityKey">Security key</param>
+        /// <param name="path">Document repository</param>
         private void ValidationDocumentFields(string docName, string securityKey, string path)
         {
             if (string.IsNullOrEmpty(docName))
